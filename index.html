@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The AI Protest — theprotest.ai</title>
+<meta name="description" content="Organizations across the world are standing together against the reckless race to superintelligence. This is The AI Protest.">
+<meta property="og:title" content="The AI Protest">
+<meta property="og:description" content="Organizations across the world are standing together against the reckless race to superintelligence.">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=IBM+Plex+Mono:wght@400;600&family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --black: #111111;
+    --paper: #f2eee6;
+    --red: #d62828;
+    --red-dark: #a31f1f;
+    --gray: #6b6b6b;
+    --font-display: 'Archivo Black', sans-serif;
+    --font-body: 'Inter', sans-serif;
+    --font-mono: 'IBM Plex Mono', monospace;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  ::selection { background: var(--red); color: var(--paper); }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--paper);
+    color: var(--black);
+    font-family: var(--font-body);
+    overflow-x: hidden;
+  }
+
+  /* grain overlay */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    pointer-events: none;
+    opacity: 0.05;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+    background-repeat: repeat;
+    background-size: 256px 256px;
+  }
+
+  /* ---- TOP BAR ---- */
+  .topbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.2rem 2rem;
+    border-bottom: 3px solid var(--black);
+    position: sticky;
+    top: 0;
+    background: var(--paper);
+    z-index: 100;
+  }
+  .topbar .wordmark {
+    font-family: var(--font-display);
+    font-size: 1.05rem;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+  }
+  .topbar .wordmark span { color: var(--red); }
+  .topbar .domain {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    color: var(--gray);
+  }
+
+  /* ---- HERO ---- */
+  .hero {
+    padding: 7rem 2rem 5rem;
+    text-align: center;
+    position: relative;
+  }
+  .hero .kicker {
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--red);
+    margin-bottom: 1.5rem;
+  }
+  .hero h1 {
+    font-family: var(--font-display);
+    text-transform: uppercase;
+    font-size: clamp(3rem, 11vw, 9rem);
+    line-height: 0.95;
+    letter-spacing: -0.01em;
+  }
+  .hero h1 .line { display: block; }
+  .hero h1 .red { color: var(--red); }
+  .hero .sub {
+    max-width: 580px;
+    margin: 2rem auto 0;
+    font-size: 1.15rem;
+    line-height: 1.65;
+    color: #333;
+  }
+  .hero .ctas {
+    margin-top: 2.5rem;
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  .btn {
+    font-family: var(--font-mono);
+    font-weight: 600;
+    font-size: 0.95rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    text-decoration: none;
+    padding: 1rem 2rem;
+    border: 3px solid var(--black);
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+  }
+  .btn-primary {
+    background: var(--red);
+    border-color: var(--red);
+    color: var(--paper);
+  }
+  .btn-secondary { color: var(--black); }
+  .btn:hover {
+    transform: translate(-3px, -3px);
+    box-shadow: 5px 5px 0 var(--black);
+  }
+
+  /* hero entrance */
+  .hero .kicker, .hero h1 .line, .hero .sub, .hero .ctas {
+    opacity: 0;
+    transform: translateY(24px);
+    animation: rise 0.7s cubic-bezier(0.2, 0.7, 0.3, 1) forwards;
+  }
+  .hero h1 .line:nth-child(1) { animation-delay: 0.1s; }
+  .hero h1 .line:nth-child(2) { animation-delay: 0.22s; }
+  .hero .sub { animation-delay: 0.45s; }
+  .hero .ctas { animation-delay: 0.6s; }
+  @keyframes rise {
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ---- MARQUEE ---- */
+  .marquee-band {
+    border-top: 3px solid var(--black);
+    border-bottom: 3px solid var(--black);
+    background: var(--black);
+    padding: 1.6rem 0;
+    overflow: hidden;
+  }
+  .marquee-track {
+    display: flex;
+    gap: 4rem;
+    width: max-content;
+    animation: scroll 28s linear infinite;
+  }
+  .marquee-band:hover .marquee-track { animation-play-state: paused; }
+  @keyframes scroll {
+    to { transform: translateX(-50%); }
+  }
+  .marquee-item {
+    display: flex;
+    align-items: center;
+    gap: 4rem;
+  }
+  .marquee-item img {
+    height: 52px;
+    width: auto;
+    background: #fff;
+    padding: 6px 10px;
+    border-radius: 4px;
+  }
+  .marquee-item .sep {
+    font-family: var(--font-display);
+    color: var(--red);
+    font-size: 1.4rem;
+  }
+
+  /* ---- COALITION ---- */
+  .coalition {
+    padding: 6rem 2rem;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+  .section-label {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--red);
+    margin-bottom: 0.8rem;
+  }
+  .coalition h2 {
+    font-family: var(--font-display);
+    text-transform: uppercase;
+    font-size: clamp(1.8rem, 4.5vw, 3.2rem);
+    line-height: 1.05;
+    margin-bottom: 1rem;
+  }
+  .coalition .lede {
+    max-width: 560px;
+    color: #333;
+    line-height: 1.65;
+    margin-bottom: 3.5rem;
+  }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+    gap: 1.5rem;
+  }
+  .card {
+    background: #fff;
+    border: 3px solid var(--black);
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.2rem;
+    opacity: 0;
+    transform: translateY(30px) scale(0.96);
+    transition: opacity 0.55s cubic-bezier(0.2, 0.7, 0.3, 1),
+                transform 0.55s cubic-bezier(0.2, 0.7, 0.3, 1),
+                box-shadow 0.2s ease;
+  }
+  .card.in {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+  .card:hover { box-shadow: 6px 6px 0 var(--red); }
+  .card .logo-box {
+    height: 110px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+  }
+  .card img {
+    max-height: 100%;
+    max-width: 100%;
+    object-fit: contain;
+  }
+  .card .name {
+    font-family: var(--font-mono);
+    font-weight: 600;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    text-align: center;
+  }
+  .card.join-card {
+    border-style: dashed;
+    background: transparent;
+    justify-content: center;
+    text-decoration: none;
+    color: var(--black);
+    cursor: pointer;
+  }
+  .card.join-card .plus {
+    font-family: var(--font-display);
+    font-size: 3rem;
+    color: var(--red);
+    line-height: 1;
+  }
+  .card.join-card:hover { box-shadow: 6px 6px 0 var(--black); }
+
+  /* ---- MANIFESTO STRIP ---- */
+  .manifesto {
+    background: var(--red);
+    color: var(--paper);
+    padding: 5rem 2rem;
+    text-align: center;
+  }
+  .manifesto p {
+    font-family: var(--font-display);
+    text-transform: uppercase;
+    font-size: clamp(1.4rem, 3.5vw, 2.6rem);
+    line-height: 1.25;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+  .manifesto .small {
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    text-transform: none;
+    letter-spacing: 0.15em;
+    margin-top: 2rem;
+    opacity: 0.85;
+  }
+
+  /* ---- JOIN ---- */
+  .join {
+    padding: 6rem 2rem;
+    text-align: center;
+    max-width: 760px;
+    margin: 0 auto;
+  }
+  .join h2 {
+    font-family: var(--font-display);
+    text-transform: uppercase;
+    font-size: clamp(1.8rem, 4.5vw, 3rem);
+    margin-bottom: 1.2rem;
+  }
+  .join p {
+    color: #333;
+    line-height: 1.65;
+    margin-bottom: 2.5rem;
+  }
+
+  /* ---- FOOTER ---- */
+  footer {
+    border-top: 3px solid var(--black);
+    padding: 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    color: var(--gray);
+  }
+  footer .domain { color: var(--red); font-weight: 600; }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="wordmark">The <span>AI</span> Protest</div>
+  <div class="domain">theprotest.ai</div>
+</div>
+
+<section class="hero">
+  <div class="kicker">A global coalition</div>
+  <h1>
+    <span class="line">The AI</span>
+    <span class="line red">Protest</span>
+  </h1>
+  <p class="sub">
+    AI companies are racing to build smarter-than-human machines they don't know how to control.
+    Organizations across the world are standing together to say: not without our consent.
+  </p>
+  <div class="ctas">
+    <a href="#join" class="btn btn-primary">Join the protest</a>
+    <a href="#coalition" class="btn btn-secondary">See who's marching</a>
+  </div>
+</section>
+
+<div class="marquee-band">
+  <div class="marquee-track" id="marquee"></div>
+</div>
+
+<section class="coalition" id="coalition">
+  <div class="section-label">The coalition</div>
+  <h2>Who's marching</h2>
+  <p class="lede">
+    From pause advocates to consumer boycotts — different strategies, one demand:
+    stop the race to superintelligence.
+  </p>
+  <div class="grid" id="grid"></div>
+</section>
+
+<section class="manifesto">
+  <p>"They are gambling our future for their profit. We are the ones who get to say no."</p>
+  <div class="small">— the streets, everywhere, 2026</div>
+</section>
+
+<section class="join" id="join">
+  <div class="section-label">Your org belongs here</div>
+  <h2>Add your organization</h2>
+  <p>
+    Whether you're three volunteers with a banner or an international movement —
+    if you stand against the reckless race to superintelligence, you stand with us.
+  </p>
+  <a href="#" class="btn btn-primary">Sign your org up</a>
+</section>
+
+<footer>
+  <div>THE AI PROTEST — demo mockup</div>
+  <div class="domain">theprotest.ai</div>
+</footer>
+
+<script>
+  const orgs = [
+    { file: 'org_pics/pauseai.jpg',        name: 'PauseAI' },
+    { file: 'org_pics/stopai.jpeg',        name: 'Stop AI' },
+    { file: 'org_pics/stoptheairace.jpeg', name: 'Stop The AI Race' },
+    { file: 'org_pics/humans_first.jpg',   name: 'Humans First' },
+    { file: 'org_pics/quitgpt.jpg',        name: 'QuitGPT' },
+    { file: 'org_pics/evitable.jpg',       name: 'Evitable' },
+    { file: 'org_pics/sapiens_first.jpg',  name: 'Sapiens First' },
+  ];
+
+  // marquee: two copies for seamless loop
+  const marquee = document.getElementById('marquee');
+  for (let copy = 0; copy < 2; copy++) {
+    const item = document.createElement('div');
+    item.className = 'marquee-item';
+    item.innerHTML = orgs.map(o =>
+      `<img src="${o.file}" alt="${o.name}"><span class="sep">✊</span>`
+    ).join('');
+    marquee.appendChild(item);
+  }
+
+  // coalition grid
+  const grid = document.getElementById('grid');
+  orgs.forEach((o, i) => {
+    const card = document.createElement('div');
+    card.className = 'card';
+    card.style.transitionDelay = (i * 90) + 'ms';
+    card.innerHTML = `
+      <div class="logo-box"><img src="${o.file}" alt="${o.name}"></div>
+      <div class="name">${o.name}</div>`;
+    grid.appendChild(card);
+  });
+  const joinCard = document.createElement('a');
+  joinCard.className = 'card join-card';
+  joinCard.href = '#join';
+  joinCard.style.transitionDelay = (orgs.length * 90) + 'ms';
+  joinCard.innerHTML = `<div class="plus">+</div><div class="name">Your organization</div>`;
+  grid.appendChild(joinCard);
+
+  // stamp-in on scroll
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+    });
+  }, { threshold: 0.15 });
+  document.querySelectorAll('.card').forEach(c => io.observe(c));
+</script>
+
+</body>
+</html>
