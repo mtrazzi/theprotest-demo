@@ -256,6 +256,15 @@
     letter-spacing: 0.1em;
     text-align: center;
   }
+  .card-links {
+    margin-top: -0.6rem;
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.04em;
+    color: var(--gray);
+  }
+  .card-links a { color: #1a5fd0; text-decoration: none; }
+  .card-links a:hover { text-decoration: underline; }
   .card.join-card {
     border-style: dashed;
     background: transparent;
@@ -477,16 +486,20 @@
     marquee.appendChild(item);
   }
 
-  // coalition grid — each card links to the org's website
+  // coalition grid — text links under each org
   const grid = document.getElementById('grid');
   orgs.forEach((o, i) => {
-    const card = document.createElement(o.website ? 'a' : 'div');
+    const card = document.createElement('div');
     card.className = 'card';
-    if (o.website) { card.href = o.website; card.target = '_blank'; card.rel = 'noopener'; }
     card.style.transitionDelay = (i * 90) + 'ms';
+    const parts = [];
+    if (o.website) parts.push(`<a href="${o.website}" target="_blank" rel="noopener">Website</a>`);
+    if (o.event) parts.push(`<a href="${o.event}" target="_blank" rel="noopener">Protest page</a>`);
+    const links = parts.length ? `<div class="card-links">(${parts.join(', ')})</div>` : '';
     card.innerHTML = `
       <div class="logo-box"><img src="${o.file}" alt="${o.name}"></div>
-      <div class="name">${o.name}</div>`;
+      <div class="name">${o.name}</div>
+      ${links}`;
     grid.appendChild(card);
   });
 
