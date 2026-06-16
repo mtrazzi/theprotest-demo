@@ -223,6 +223,8 @@
     flex-direction: column;
     align-items: center;
     gap: 1.2rem;
+    text-decoration: none;
+    color: var(--black);
     opacity: 0;
     transform: translateY(30px) scale(0.96);
     transition: opacity 0.55s cubic-bezier(0.2, 0.7, 0.3, 1),
@@ -405,7 +407,7 @@
     Organizations across the world are standing together to say: not without our consent.
   </p>
   <div class="ctas">
-    <a href="https://lu.ma/s0k8wvee?utm_source=theprotest&utm_content=hero-cta" target="_blank" rel="noopener" class="btn btn-primary">Join the protest</a>
+    <a href="#events" class="btn btn-primary">Join the protest</a>
     <a href="#coalition" class="btn btn-secondary">See who's marching</a>
   </div>
 </section>
@@ -425,28 +427,12 @@
 </section>
 
 <section class="events" id="events">
-  <div class="section-label">Next actions</div>
-  <h2>The protest continues</h2>
+  <div class="section-label">Join us</div>
+  <h2>Sign up to march</h2>
   <p class="lede">
-    The AI Protest isn't a single day — it's one movement that keeps showing up.
-    The next action is in San Francisco. Can't make it? Bring the protest to your city.
+    Each org runs its own actions. Find a protest near you and show up.
   </p>
-  <div class="event-card">
-    <div class="date"><span class="day">11</span><span class="month">July</span></div>
-    <div class="info">
-      <div class="city">San Francisco</div>
-      <div class="host">Hosted by the coalition</div>
-    </div>
-    <a href="https://lu.ma/s0k8wvee?utm_source=theprotest&utm_content=event-card" target="_blank" rel="noopener" class="btn btn-primary">RSVP</a>
-  </div>
-  <div class="event-card placeholder">
-    <div class="date"><span class="day">?</span><span class="month">Next</span></div>
-    <div class="info">
-      <div class="city">Your city</div>
-      <div class="host">Hosted by your organization</div>
-    </div>
-    <a href="https://forms.gle/DD8VrZaoXwbgV4b88" target="_blank" rel="noopener" class="btn btn-secondary">Host the next action</a>
-  </div>
+  <div id="protests"></div>
 </section>
 
 <section class="manifesto">
@@ -471,12 +457,13 @@
 
 <script>
   const orgs = [
-    { file: 'org_pics/pauseai.jpg',        name: 'PauseAI' },
-    { file: 'org_pics/stopai.jpeg',        name: 'Stop AI' },
-    { file: 'org_pics/stoptheairace.jpeg', name: 'Stop The AI Race' },
-    { file: 'org_pics/quitgpt.jpg',        name: 'QuitGPT' },
-    { file: 'org_pics/evitable.jpg',       name: 'Evitable' },
-    { file: 'org_pics/sapiens_first.jpg',  name: 'Sapiens First' },
+    { file: 'org_pics/stoptheairace.jpeg', name: 'Stop The AI Race', website: 'https://stoptherace.ai/',
+      event: 'https://lu.ma/s0k8wvee?utm_source=theprotest&utm_content=protest-card', eventDay: '11', eventMonth: 'July', eventCity: 'San Francisco' },
+    { file: 'org_pics/quitgpt.jpg',        name: 'QuitGPT',          website: 'https://quitgpt.org/' },
+    { file: 'org_pics/evitable.jpg',       name: 'Evitable',         website: 'https://evitable.com/' },
+    { file: 'org_pics/pauseai.jpg',        name: 'PauseAI',          website: 'https://www.pauseai-us.org/' },
+    { file: 'org_pics/stopai.jpeg',        name: 'Stop AI',          website: 'https://www.stopai.info/' },
+    { file: 'org_pics/sapiens_first.jpg',  name: 'Sapiens First',    website: 'https://sapiensfirst.org/' },
   ];
 
   // marquee: two copies for seamless loop
@@ -490,16 +477,32 @@
     marquee.appendChild(item);
   }
 
-  // coalition grid
+  // coalition grid — each card links to the org's website
   const grid = document.getElementById('grid');
   orgs.forEach((o, i) => {
-    const card = document.createElement('div');
+    const card = document.createElement(o.website ? 'a' : 'div');
     card.className = 'card';
+    if (o.website) { card.href = o.website; card.target = '_blank'; card.rel = 'noopener'; }
     card.style.transitionDelay = (i * 90) + 'ms';
     card.innerHTML = `
       <div class="logo-box"><img src="${o.file}" alt="${o.name}"></div>
       <div class="name">${o.name}</div>`;
     grid.appendChild(card);
+  });
+
+  // protests — one card per org with an event, styled like the coalition list
+  const protests = document.getElementById('protests');
+  orgs.filter(o => o.event).forEach(o => {
+    const card = document.createElement('div');
+    card.className = 'event-card';
+    card.innerHTML = `
+      <div class="date"><span class="day">${o.eventDay}</span><span class="month">${o.eventMonth}</span></div>
+      <div class="info">
+        <div class="city">${o.eventCity}</div>
+        <div class="host">Hosted by ${o.name}</div>
+      </div>
+      <a href="${o.event}" target="_blank" rel="noopener" class="btn btn-primary">Sign up</a>`;
+    protests.appendChild(card);
   });
   const joinCard = document.createElement('a');
   joinCard.className = 'card join-card';
