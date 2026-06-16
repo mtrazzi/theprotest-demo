@@ -475,16 +475,22 @@
     { file: 'org_pics/sapiens_first.jpg',  name: 'Sapiens First',    website: 'https://sapiensfirst.org/' },
   ];
 
-  // marquee: two copies for seamless loop
+  // marquee: two copies for a seamless translateX(-50%) loop.
+  // Each copy repeats the logo set enough times to overflow the screen,
+  // otherwise the band goes blank once it scrolls past the few logos.
   const marquee = document.getElementById('marquee');
+  const logoSet = orgs.map(o =>
+    `<img src="${o.file}" alt="${o.name}"><span class="sep">✊</span>`
+  ).join('');
+  const reps = Math.max(2, Math.ceil(window.innerWidth / 500));
   for (let copy = 0; copy < 2; copy++) {
     const item = document.createElement('div');
     item.className = 'marquee-item';
-    item.innerHTML = orgs.map(o =>
-      `<img src="${o.file}" alt="${o.name}"><span class="sep">✊</span>`
-    ).join('');
+    item.innerHTML = logoSet.repeat(reps);
     marquee.appendChild(item);
   }
+  // keep scroll speed constant: the loop distance grows with reps, so scale time too
+  marquee.style.animationDuration = (28 * reps) + 's';
 
   // coalition grid — text links under each org
   const grid = document.getElementById('grid');
