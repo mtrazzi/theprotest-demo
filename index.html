@@ -11,6 +11,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=IBM+Plex+Mono:wght@400;600&family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
 <style>
   :root {
     --black: #111111;
@@ -283,7 +284,7 @@
 
   /* ---- EVENTS ---- */
   .events {
-    padding: 6rem 2rem;
+    padding: 6rem 2rem 2rem;
     max-width: 900px;
     margin: 0 auto;
   }
@@ -300,86 +301,84 @@
     line-height: 1.65;
     margin-bottom: 3rem;
   }
-  .event-card {
+
+  /* ---- SIGN-UP ROWS ---- */
+  .signup-row {
     display: flex;
     align-items: center;
-    gap: 1.8rem;
+    justify-content: space-between;
+    gap: 1.5rem;
+    flex-wrap: wrap;
     background: #fff;
     border: 3px solid var(--black);
-    padding: 1.5rem 1.8rem;
-    margin-bottom: 1.2rem;
+    padding: 1.2rem 1.6rem;
+    margin-bottom: 1rem;
+  }
+  .signup-row:hover { box-shadow: 6px 6px 0 var(--red); }
+  .signup-org {
+    font-family: var(--font-display);
+    text-transform: uppercase;
+    font-size: 1.1rem;
+  }
+
+  /* ---- MARCH SCHEDULE + MAP ---- */
+  .march { max-width: 680px; margin: 3rem auto 0; }
+  .march-head {
+    display: flex;
     flex-wrap: wrap;
+    align-items: baseline;
+    gap: 0.4rem 1rem;
+    border-top: 3px solid var(--black);
+    border-bottom: 3px solid var(--black);
+    padding: 0.9rem 0;
+    margin-bottom: 1.6rem;
   }
-  .event-card .date {
+  .march-head .march-date {
     font-family: var(--font-display);
     text-transform: uppercase;
-    text-align: center;
-    border: 3px solid var(--red);
-    color: var(--red);
-    padding: 0.6rem 1rem;
-    min-width: 92px;
+    font-size: 1.1rem;
   }
-  .event-card .date .day { font-size: 1.8rem; line-height: 1; display: block; }
-  .event-card .date .month { font-size: 0.8rem; letter-spacing: 0.1em; }
-  .event-card .info { flex: 1; min-width: 200px; }
-  .event-card .info .city {
-    font-family: var(--font-display);
-    text-transform: uppercase;
-    font-size: 1.2rem;
-  }
-  .event-card .info .host {
+  .march-head .march-window {
     font-family: var(--font-mono);
-    font-size: 0.8rem;
+    font-size: 0.78rem;
     color: var(--gray);
-    margin-top: 0.4rem;
+    letter-spacing: 0.05em;
   }
-  .event-card.placeholder {
-    border-style: dashed;
-    background: transparent;
+  .schedule { margin-bottom: 2rem; }
+  .schedule .stop {
+    display: flex;
+    gap: 1rem;
+    align-items: baseline;
+    padding: 0.55rem 0;
+    border-bottom: 1px solid rgba(17,17,17,0.12);
   }
-  .event-card.placeholder .date { border-color: var(--gray); color: var(--gray); }
-
-  /* ---- MANIFESTO STRIP ---- */
-  .manifesto {
-    background: var(--red);
-    color: var(--paper);
-    padding: 5rem 2rem;
-    text-align: center;
-  }
-  .manifesto p {
-    font-family: var(--font-display);
-    text-transform: uppercase;
-    font-size: clamp(1.4rem, 3.5vw, 2.6rem);
-    line-height: 1.25;
-    max-width: 900px;
-    margin: 0 auto;
-  }
-  .manifesto .small {
+  .schedule .stop:last-child { border-bottom: none; }
+  .schedule .time {
     font-family: var(--font-mono);
-    font-size: 0.85rem;
-    text-transform: none;
-    letter-spacing: 0.15em;
-    margin-top: 2rem;
-    opacity: 0.85;
+    font-weight: 600;
+    font-size: 0.8rem;
+    color: var(--red);
+    min-width: 70px;
+    white-space: nowrap;
   }
-
-  /* ---- JOIN ---- */
-  .join {
-    padding: 6rem 2rem;
-    text-align: center;
-    max-width: 760px;
-    margin: 0 auto;
+  .schedule .what { font-size: 0.95rem; line-height: 1.4; }
+  .schedule .what .emoji { margin-right: 0.45rem; }
+  .schedule .what .addr {
+    font-family: var(--font-mono);
+    font-size: 0.74rem;
+    color: var(--gray);
+    margin-left: 0.45rem;
   }
-  .join h2 {
-    font-family: var(--font-display);
-    text-transform: uppercase;
-    font-size: clamp(1.8rem, 4.5vw, 3rem);
-    margin-bottom: 1.2rem;
+  .map-frame { border: 3px solid var(--black); }
+  #route-map { width: 100%; height: 380px; background: var(--paper); }
+  #route-map .leaflet-control-attribution {
+    background: rgba(242,238,230,0.85) !important;
+    font-size: 9px !important;
   }
-  .join p {
-    color: #333;
-    line-height: 1.65;
-    margin-bottom: 2.5rem;
+  #route-map .leaflet-control-zoom a {
+    background: var(--paper) !important;
+    color: var(--black) !important;
+    border-color: rgba(214,40,40,0.4) !important;
   }
 
   /* ---- FOOTER ---- */
@@ -425,6 +424,32 @@
   <div class="marquee-track" id="marquee"></div>
 </div>
 
+<section class="events" id="events">
+  <div class="section-label">Join us</div>
+  <h2>Sign up to march</h2>
+  <p class="lede">
+    Each org has its own sign-up page — pick a protest and show up.
+  </p>
+  <div id="protests"></div>
+
+  <div class="march">
+    <div class="march-head">
+      <span class="march-date">📅 Saturday, July 11</span>
+      <span class="march-window">12–3 PM · San Francisco</span>
+    </div>
+    <div class="schedule">
+      <div class="stop"><span class="time">12:00 PM</span><span class="what"><span class="emoji">📍</span>Rally at OpenAI<span class="addr">1455 3rd St</span></span></div>
+      <div class="stop"><span class="time">12:30 PM</span><span class="what"><span class="emoji">🗣️</span>Speeches at OpenAI</span></div>
+      <div class="stop"><span class="time">1:00 PM</span><span class="what"><span class="emoji">📍</span>Walk to Anthropic<span class="addr">500 Howard St</span></span></div>
+      <div class="stop"><span class="time">1:45 PM</span><span class="what"><span class="emoji">🗣️</span>Speeches at Anthropic</span></div>
+      <div class="stop"><span class="time">2:15 PM</span><span class="what"><span class="emoji">📍</span>Walk to Google DeepMind<span class="addr">345 Spear St</span></span></div>
+      <div class="stop"><span class="time">2:30 PM</span><span class="what"><span class="emoji">🗣️</span>Speeches at Google DeepMind</span></div>
+      <div class="stop"><span class="time">3:00 PM</span><span class="what"><span class="emoji">🎉</span>After-party at Rincon Park</span></div>
+    </div>
+    <div class="map-frame"><div id="route-map"></div></div>
+  </div>
+</section>
+
 <section class="coalition" id="coalition">
   <div class="section-label">The coalition</div>
   <h2>Who's marching</h2>
@@ -435,30 +460,6 @@
   <div class="grid" id="grid"></div>
 </section>
 
-<section class="events" id="events">
-  <div class="section-label">Join us</div>
-  <h2>Sign up to march</h2>
-  <p class="lede">
-    Each org runs its own actions. Find a protest near you and show up.
-  </p>
-  <div id="protests"></div>
-</section>
-
-<section class="manifesto">
-  <p>"They are gambling our future for their profit. We are the ones who get to say no."</p>
-  <div class="small">— the streets, everywhere, 2026</div>
-</section>
-
-<section class="join" id="join">
-  <div class="section-label">Your org belongs here</div>
-  <h2>Add your organization</h2>
-  <p>
-    Whether you're three volunteers with a banner or an international movement —
-    if you stand against the reckless race to superintelligence, you stand with us.
-  </p>
-  <a href="https://forms.gle/DD8VrZaoXwbgV4b88" target="_blank" rel="noopener" class="btn btn-primary">Sign your org up</a>
-</section>
-
 <footer>
   <div>THE AI PROTEST — demo mockup</div>
   <div class="domain">theprotest.ai</div>
@@ -467,7 +468,7 @@
 <script>
   const orgs = [
     { file: 'org_pics/stoptheairace.jpeg', name: 'Stop The AI Race', website: 'https://stoptherace.ai/',
-      event: 'https://lu.ma/s0k8wvee?utm_source=theprotest&utm_content=protest-card', eventDay: '11', eventMonth: 'July', eventCity: 'San Francisco' },
+      event: 'https://lu.ma/s0k8wvee?utm_source=theprotest&utm_content=protest-card' },
     { file: 'org_pics/quitgpt.jpg',        name: 'QuitGPT',          website: 'https://quitgpt.org/' },
     { file: 'org_pics/evitable.jpg',       name: 'Evitable',         website: 'https://evitable.com/' },
     { file: 'org_pics/sapiens_first.jpg',  name: 'Sapiens First',    website: 'https://sapiensfirst.org/' },
@@ -504,20 +505,18 @@
   // protests — one card per org with an event, styled like the coalition list
   const protests = document.getElementById('protests');
   orgs.filter(o => o.event).forEach(o => {
-    const card = document.createElement('div');
-    card.className = 'event-card';
-    card.innerHTML = `
-      <div class="date"><span class="day">${o.eventDay}</span><span class="month">${o.eventMonth}</span></div>
-      <div class="info">
-        <div class="city">${o.eventCity}</div>
-        <div class="host">Hosted by ${o.name}</div>
-      </div>
+    const row = document.createElement('div');
+    row.className = 'signup-row';
+    row.innerHTML = `
+      <span class="signup-org">${o.name}</span>
       <a href="${o.event}" target="_blank" rel="noopener" class="btn btn-primary">Sign up</a>`;
-    protests.appendChild(card);
+    protests.appendChild(row);
   });
   const joinCard = document.createElement('a');
   joinCard.className = 'card join-card';
-  joinCard.href = '#join';
+  joinCard.href = 'https://forms.gle/DD8VrZaoXwbgV4b88';
+  joinCard.target = '_blank';
+  joinCard.rel = 'noopener';
   joinCard.style.transitionDelay = (orgs.length * 90) + 'ms';
   joinCard.innerHTML = `<div class="plus">+</div><div class="name">Your organization</div>`;
   grid.appendChild(joinCard);
@@ -529,6 +528,66 @@
     });
   }, { threshold: 0.15 });
   document.querySelectorAll('.card').forEach(c => io.observe(c));
+</script>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+  // march route map — OpenAI → Anthropic → Google DeepMind
+  (function () {
+    if (!window.L || !document.getElementById('route-map')) return;
+
+    var map = L.map('route-map', {
+      center: [37.7820, -122.3970],
+      zoom: 14, minZoom: 11,
+      zoomControl: true, scrollWheelZoom: false
+    });
+
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '&copy; OpenStreetMap', maxZoom: 19
+    }).addTo(map);
+
+    // desaturate tiles to fit the paper theme
+    var tilePane = document.querySelector('#route-map .leaflet-tile-pane');
+    if (tilePane) tilePane.style.filter = 'saturate(0) contrast(1.05)';
+
+    var leg1 = [
+      [37.7701, -122.3893],
+      [37.77646659734041, -122.39011389051585],
+      [37.77709691866833, -122.39059424543301],
+      [37.785000222708426, -122.40050793066582],
+      [37.78838571623302, -122.39641255924988],
+    ];
+    var leg2 = [
+      [37.78838571623302, -122.39641255924988],
+      [37.7913253940075, -122.3925230058142],
+      [37.788883, -122.389469],
+      [37.789528, -122.388621],
+      [37.789969, -122.389304],
+    ];
+    var route = leg1.concat(leg2.slice(1));
+
+    L.polyline(route, { color: '#ffffff', weight: 8, opacity: 0.5, lineJoin: 'round', lineCap: 'round' }).addTo(map);
+    var routeLine = L.polyline(route, { color: '#d62828', weight: 5, opacity: 0.95, lineJoin: 'round', lineCap: 'round' }).addTo(map);
+    map.fitBounds(routeLine.getBounds().pad(0.12));
+
+    var dotStyle = { radius: 6, fillColor: '#d62828', color: '#f2eee6', weight: 2.5, fillOpacity: 1 };
+    var stops = [
+      { coord: leg1[0], label: 'OpenAI', sub: '1455 3rd St', side: 'right' },
+      { coord: leg1[leg1.length - 1], label: 'Anthropic', sub: '500 Howard St', side: 'left' },
+      { coord: leg2[leg2.length - 1], label: 'Google DeepMind', sub: '345 Spear St', side: 'right' },
+    ];
+    stops.forEach(function (stop) {
+      L.circleMarker(stop.coord, dotStyle).addTo(map);
+      var html = '<div style="white-space:nowrap;">'
+        + '<span style="font-family:\'IBM Plex Mono\',monospace;font-size:12px;font-weight:700;color:#111;text-shadow:0 0 5px #f2eee6,0 0 5px #f2eee6,0 0 5px #f2eee6;">' + stop.label + '</span>'
+        + (stop.sub ? '<br><span style="font-family:\'IBM Plex Mono\',monospace;font-size:10px;color:#6b6b6b;text-shadow:0 0 4px #f2eee6,0 0 4px #f2eee6;">' + stop.sub + '</span>' : '')
+        + '</div>';
+      L.marker(stop.coord, {
+        icon: L.divIcon({ className: '', html: html, iconSize: [0, 0], iconAnchor: stop.side === 'left' ? [110, 14] : [-10, 14] }),
+        interactive: false
+      }).addTo(map);
+    });
+  })();
 </script>
 
 </body>
