@@ -381,6 +381,82 @@
     border-color: rgba(214,40,40,0.4) !important;
   }
 
+  /* ---- SUPPORTERS (endorsing, not marching) ---- */
+  .supporters {
+    padding: 0 2rem 6rem;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+  .supporters h2 {
+    font-family: var(--font-display);
+    text-transform: uppercase;
+    font-size: clamp(1.8rem, 4.5vw, 3.2rem);
+    line-height: 1.05;
+    margin-bottom: 1rem;
+  }
+  .supporters .lede {
+    max-width: 560px;
+    color: #333;
+    line-height: 1.65;
+    margin-bottom: 3.5rem;
+  }
+
+  /* ---- HELP SPREAD THE WORD ---- */
+  .spread {
+    padding: 0 2rem 6rem;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+  .spread-box {
+    border: 3px solid var(--black);
+    background: #fff;
+    padding: 2.5rem 2rem;
+    max-width: 680px;
+    margin: 0 auto;
+    text-align: center;
+  }
+  .spread-box h2 {
+    font-family: var(--font-display);
+    text-transform: uppercase;
+    font-size: clamp(1.4rem, 3.5vw, 2.2rem);
+    margin-bottom: 0.8rem;
+  }
+  .spread-box p {
+    color: #333;
+    line-height: 1.6;
+    max-width: 460px;
+    margin: 0 auto 1.8rem;
+  }
+  .spread-form {
+    display: flex;
+    gap: 0.8rem;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  .spread-form input {
+    font-family: var(--font-mono);
+    font-size: 0.95rem;
+    padding: 1rem 1.2rem;
+    border: 3px solid var(--black);
+    background: var(--paper);
+    color: var(--black);
+    flex: 1;
+    min-width: 220px;
+    max-width: 340px;
+  }
+  .spread-form input:focus {
+    outline: none;
+    border-color: var(--red);
+  }
+  .spread-form button { cursor: pointer; }
+  .spread-thanks {
+    display: none;
+    font-family: var(--font-mono);
+    color: var(--red);
+    font-weight: 600;
+    margin-top: 0.5rem;
+  }
+
   /* ---- FOOTER ---- */
   footer {
     border-top: 3px solid var(--black);
@@ -461,6 +537,29 @@
   <div class="grid" id="grid"></div>
 </section>
 
+<section class="supporters" id="supporters">
+  <div class="section-label">In solidarity</div>
+  <h2>Who's backing it</h2>
+  <p class="lede">
+    Organizations and public figures who stand with the march but cannot be in San Francisco
+    can endorse it in solidarity.
+  </p>
+  <div class="grid" id="supporters-grid"></div>
+</section>
+
+<section class="spread" id="spread">
+  <div class="spread-box">
+    <div class="section-label">Lend a hand</div>
+    <h2>Help spread the word</h2>
+    <p>Get announcements to forward before the march, and photos and clips to share after.</p>
+    <form class="spread-form" id="spread-form" action="https://formspree.io/f/mzdqlozp" method="POST">
+      <input type="email" name="email" placeholder="Your email" required>
+      <button type="submit" class="btn btn-primary">Sign up</button>
+    </form>
+    <p class="spread-thanks" id="spread-thanks">Thanks. Watch your inbox before the march.</p>
+  </div>
+</section>
+
 <footer>
   <div>THE AI PROTEST</div>
   <div class="domain">theprotest.ai</div>
@@ -529,6 +628,19 @@
   joinCard.innerHTML = `<div class="plus">+</div><div class="name">Your organization</div>`;
   grid.appendChild(joinCard);
 
+  // "Who's backing it" holds a single "+ Your organization" card for now (no endorsers
+  // confirmed yet). When backers are ready, render them into #supporters-grid from a SEPARATE
+  // supporters array, never merged into orgs, so they cannot leak into the marquee, the
+  // marching grid (#grid), or the sign-up rows (#protests), all of which imply attendance.
+  const supportersGrid = document.getElementById('supporters-grid');
+  const endorseCard = document.createElement('a');
+  endorseCard.className = 'card join-card';
+  endorseCard.href = 'https://forms.gle/DD8VrZaoXwbgV4b88';
+  endorseCard.target = '_blank';
+  endorseCard.rel = 'noopener';
+  endorseCard.innerHTML = `<div class="plus">+</div><div class="name">Your organization</div>`;
+  supportersGrid.appendChild(endorseCard);
+
   // stamp-in on scroll
   const io = new IntersectionObserver(entries => {
     entries.forEach(e => {
@@ -536,6 +648,26 @@
     });
   }, { threshold: 0.15 });
   document.querySelectorAll('.card').forEach(c => io.observe(c));
+
+  // "Help spread the word" capture: POST to Formspree, swap to a thank-you on success.
+  // Separate list from the org signup form; mirrors stoptherace.ai's fetch-based handler.
+  const spreadForm = document.getElementById('spread-form');
+  const spreadThanks = document.getElementById('spread-thanks');
+  if (spreadForm) {
+    spreadForm.addEventListener('submit', function (e) {
+      e.preventDefault();
+      fetch(spreadForm.action, {
+        method: 'POST',
+        body: new FormData(spreadForm),
+        headers: { 'Accept': 'application/json' }
+      }).then(function (response) {
+        if (response.ok) {
+          spreadForm.style.display = 'none';
+          spreadThanks.style.display = 'block';
+        }
+      });
+    });
+  }
 </script>
 
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
