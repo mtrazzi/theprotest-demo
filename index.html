@@ -320,6 +320,18 @@
     text-transform: uppercase;
     font-size: 1.1rem;
   }
+  /* On narrow screens stack the org name over a full-width button so a long
+     name can't shove the button onto its own left-aligned line. */
+  @media (max-width: 560px) {
+    .signup-row {
+      flex-direction: column;
+      align-items: stretch;
+      gap: 1rem;
+    }
+    .signup-row .btn {
+      text-align: center;
+    }
+  }
 
   /* ---- MARCH SCHEDULE + MAP ---- */
   .march { max-width: 680px; margin: 3rem auto 0; }
