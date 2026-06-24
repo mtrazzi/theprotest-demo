@@ -683,11 +683,26 @@
   joinCard.innerHTML = `<div class="plus">+</div><div class="name">Your organization</div>`;
   grid.appendChild(joinCard);
 
-  // "Who's backing it" holds a single "+ Your organization" card for now (no endorsers
-  // confirmed yet). When backers are ready, render them into #supporters-grid from a SEPARATE
-  // supporters array, never merged into orgs, so they cannot leak into the marquee, the
+  // "Who's backing it" lists endorsers who stand with the march in solidarity. They live in a
+  // SEPARATE supporters array, never merged into orgs, so they cannot leak into the marquee, the
   // marching grid (#grid), or the sign-up rows (#protests), all of which imply attendance.
+  const supporters = [
+    { file: 'org_pics/nuhw.jpg', name: 'National Union of Healthcare Workers', website: 'https://home.nuhw.org/' },
+  ];
   const supportersGrid = document.getElementById('supporters-grid');
+  supporters.forEach((s, i) => {
+    const card = document.createElement('div');
+    card.className = 'card';
+    card.style.transitionDelay = (i * 90) + 'ms';
+    const link = s.website
+      ? `<div class="card-links">(<a href="${s.website}" target="_blank" rel="noopener">Website</a>)</div>`
+      : '';
+    card.innerHTML = `
+      <div class="logo-box"><img src="${s.file}" alt="${s.name}"></div>
+      <div class="name">${s.name}</div>
+      ${link}`;
+    supportersGrid.appendChild(card);
+  });
   const endorseCard = document.createElement('a');
   endorseCard.className = 'card join-card';
   endorseCard.href = 'https://forms.gle/DD8VrZaoXwbgV4b88';
