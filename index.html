@@ -184,6 +184,39 @@
     font-size: 1.4rem;
   }
 
+  /* ---- THE DEMAND (full-width strip below the marquee) ---- */
+  .demand-strip {
+    background: var(--paper);
+    color: var(--black);
+    border-bottom: 3px solid var(--black);
+    padding: 3rem 2rem;
+    text-align: center;
+  }
+  .demand-strip .label {
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--red);
+    margin-bottom: 1rem;
+  }
+  .demand-strip .statement {
+    font-family: var(--font-body);
+    font-weight: 500;
+    font-size: clamp(1.2rem, 2.8vw, 1.9rem);
+    line-height: 1.5;
+    max-width: 820px;
+    margin: 0 auto;
+  }
+  .demand-strip .statement .hl { color: var(--red); font-weight: 700; }
+  .demand-strip .who {
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    letter-spacing: 0.03em;
+    color: var(--gray);
+    margin: 1.2rem auto 0;
+  }
+
   /* ---- COALITION ---- */
   .coalition {
     padding: 6rem 2rem;
@@ -512,6 +545,15 @@
 <div class="marquee-band">
   <div class="marquee-track" id="marquee"></div>
 </div>
+
+<section class="demand-strip" id="demand">
+  <p class="label">The demand</p>
+  <p class="statement">
+    Sam Altman, Dario Amodei and Demis Hassabis should commit to stop developing more
+    powerful AI <span class="hl">if every other major AI company does the same.</span>
+  </p>
+  <p class="who">The CEOs of OpenAI, Anthropic and Google DeepMind.</p>
+</section>
 
 <section class="events" id="events">
   <div class="section-label">Join us</div>
