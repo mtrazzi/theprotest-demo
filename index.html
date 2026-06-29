@@ -178,11 +178,6 @@
     padding: 6px 10px;
     border-radius: 4px;
   }
-  .marquee-item .sep {
-    font-family: var(--font-display);
-    color: var(--red);
-    font-size: 1.4rem;
-  }
 
   /* ---- THE DEMAND (full-width strip below the marquee) ---- */
   .demand-strip {
@@ -363,6 +358,14 @@
     }
     .signup-row .btn {
       text-align: center;
+    }
+    /* at least two columns on mobile so the list isn't a slow one-by-one scroll */
+    .grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 0.75rem;
+    }
+    .card {
+      padding: 0.9rem;
     }
   }
 
@@ -640,7 +643,7 @@
   // otherwise the band goes blank once it scrolls past the few logos.
   const marquee = document.getElementById('marquee');
   const logoSet = orgs.map(o =>
-    `<img src="${o.file}" alt="${o.name}"><span class="sep">✊</span>`
+    `<img src="${o.file}" alt="${o.name}">`
   ).join('');
   const reps = Math.max(2, Math.ceil(window.innerWidth / 500));
   for (let copy = 0; copy < 2; copy++) {
