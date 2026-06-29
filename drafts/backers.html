@@ -178,6 +178,11 @@
     padding: 6px 10px;
     border-radius: 4px;
   }
+  .marquee-item .sep {
+    font-family: var(--font-display);
+    color: var(--red);
+    font-size: 1.4rem;
+  }
 
   /* ---- THE DEMAND (full-width strip below the marquee) ---- */
   .demand-strip {
@@ -359,18 +364,9 @@
     .signup-row .btn {
       text-align: center;
     }
-    /* at least two columns on mobile so the list isn't a slow one-by-one scroll */
-    .grid {
-      grid-template-columns: repeat(2, 1fr);
-      gap: 0.75rem;
-    }
-    .card {
-      padding: 0.9rem;
-    }
   }
 
   /* ---- MARCH SCHEDULE + MAP ---- */
-  .march-cta { text-align: center; margin: 2rem 0; }
   .march { max-width: 680px; margin: 3rem auto 0; }
   .march-head {
     display: flex;
@@ -428,6 +424,26 @@
     background: var(--paper) !important;
     color: var(--black) !important;
     border-color: rgba(214,40,40,0.4) !important;
+  }
+
+  /* ---- SUPPORTERS (endorsing, not marching) ---- */
+  .supporters {
+    padding: 0 2rem 6rem;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+  .supporters h2 {
+    font-family: var(--font-display);
+    text-transform: uppercase;
+    font-size: clamp(1.8rem, 4.5vw, 3.2rem);
+    line-height: 1.05;
+    margin-bottom: 1rem;
+  }
+  .supporters .lede {
+    max-width: 560px;
+    color: #333;
+    line-height: 1.65;
+    margin-bottom: 3.5rem;
   }
 
   /* ---- HELP SPREAD THE WORD ---- */
@@ -521,7 +537,7 @@
     to take our future back.
   </p>
   <div class="ctas">
-    <a href="https://partiful.com/e/EChgbBMsoeN3qVnATHKJ" target="_blank" rel="noopener" class="btn btn-primary">Join the protest</a>
+    <a href="#events" class="btn btn-primary">Join the protest</a>
     <a href="#coalition" class="btn btn-secondary">See who's marching</a>
   </div>
 </section>
@@ -541,11 +557,11 @@
 
 <section class="events" id="events">
   <div class="section-label">Join us</div>
-  <h2>The March</h2>
+  <h2>Sign up to march</h2>
   <p class="lede">
-    Join us for an afternoon of music, chants and community, featuring a marching band and ending in
-    an after-party (with food) at Rincon Park!
+    Each org has its own sign-up page:
   </p>
+  <div id="protests"></div>
 
   <div class="march">
     <div class="march-head">
@@ -554,15 +570,12 @@
     </div>
     <div class="schedule">
       <div class="stop"><span class="time">12:00 PM</span><span class="what"><span class="emoji">📍</span>Rally at OpenAI<span class="addr">1455 3rd St</span></span></div>
-      <div class="stop"><span class="time">12:30 PM</span><span class="what"><span class="emoji">🗣️</span>Speeches (+music & chants) at OpenAI</span></div>
+      <div class="stop"><span class="time">12:30 PM</span><span class="what"><span class="emoji">🗣️</span>Speeches at OpenAI</span></div>
       <div class="stop"><span class="time">1:00 PM</span><span class="what"><span class="emoji">📍</span>Walk to Anthropic<span class="addr">500 Howard St</span></span></div>
-      <div class="stop"><span class="time">1:45 PM</span><span class="what"><span class="emoji">🗣️</span>Speeches (+music & chants) at Anthropic</span></div>
+      <div class="stop"><span class="time">1:45 PM</span><span class="what"><span class="emoji">🗣️</span>Speeches at Anthropic</span></div>
       <div class="stop"><span class="time">2:15 PM</span><span class="what"><span class="emoji">📍</span>Walk to Google DeepMind<span class="addr">345 Spear St</span></span></div>
-      <div class="stop"><span class="time">2:30 PM</span><span class="what"><span class="emoji">🗣️</span>Speeches (+music & chants) at Google DeepMind</span></div>
+      <div class="stop"><span class="time">2:30 PM</span><span class="what"><span class="emoji">🗣️</span>Speeches at Google DeepMind</span></div>
       <div class="stop"><span class="time">3:00 PM</span><span class="what"><span class="emoji">🎉</span>After-party at Rincon Park</span></div>
-    </div>
-    <div class="march-cta">
-      <a href="https://partiful.com/e/EChgbBMsoeN3qVnATHKJ" target="_blank" rel="noopener" class="btn btn-primary">Join the protest</a>
     </div>
     <div class="map-frame"><div id="route-map"></div></div>
   </div>
@@ -576,6 +589,16 @@
     Different harms, different strategies, one demand: stop developing more advanced AI without our consent.
   </p>
   <div class="grid" id="grid"></div>
+</section>
+
+<section class="supporters" id="supporters">
+  <div class="section-label">In solidarity</div>
+  <h2>Who's backing it</h2>
+  <p class="lede">
+    Organizations and public figures who stand with the march but cannot be in San Francisco
+    can endorse it in solidarity.
+  </p>
+  <div class="grid" id="supporters-grid"></div>
 </section>
 
 <section class="spread" id="spread">
@@ -598,18 +621,21 @@
 
 <script>
   const orgs = [
-    { file: 'org_pics/stoptheairace.jpeg', name: 'Stop The AI Race', website: 'https://stoptherace.ai/',
+    { file: '../org_pics/stoptheairace.jpeg', name: 'Stop The AI Race', website: 'https://stoptherace.ai/',
       event: 'https://lu.ma/s0k8wvee?utm_source=theprotest&utm_content=protest-card' },
-    { file: 'org_pics/quitgpt.jpg',        name: 'QuitGPT',          website: 'https://quitgpt.org/' },
-    { file: 'org_pics/stopai.jpeg',        name: 'Stop AI',          website: 'https://www.stopai.info/',
+    { file: '../org_pics/quitgpt.jpg',        name: 'QuitGPT',          website: 'https://quitgpt.org/' },
+    { file: '../org_pics/stopai.jpeg',        name: 'Stop AI',          website: 'https://www.stopai.info/',
       event: 'https://lu.ma/qpw1lg0g?utm_source=theprotest&utm_content=protest-card' },
-    { file: 'org_pics/sapiens_first.jpg',  name: 'Sapiens First',    website: 'https://sapiensfirst.org/' },
-    { file: 'org_pics/pauseaius.jpg',      name: 'PauseAI US',       website: 'https://www.pauseai-us.org/' },
-    { file: 'org_pics/nuhw.jpg',           name: 'National Union of Healthcare Workers', website: 'https://home.nuhw.org/' },
-    { file: 'org_pics/IAIGA.jpg',          name: 'International AI Governance Alliance', website: 'https://iaiga.org/' },
-    { file: 'org_pics/Collective Action for Existential Safety.jpg', name: 'Collective Action for Existential Safety', website: 'https://ces.existentialsafety.workers.dev/' },
-    { file: 'org_pics/Stop Gilroy Datacenter.jpg', name: 'Stop Gilroy Datacenter Now', website: 'https://www.instagram.com/stopgilroydatacenternow/' },
-    { file: 'org_pics/rehumanize.png',     name: 'Rehumanize International', website: 'https://www.rehumanizeintl.org/' },
+    { file: '../org_pics/pauseaius.jpg',      name: 'PauseAI US',       website: 'https://www.pauseai-us.org/' },
+    { file: '../org_pics/nuhw.jpg',           name: 'National Union of Healthcare Workers', website: 'https://home.nuhw.org/' },
+  ];
+
+  // "Who's backing it" — endorsers in solidarity, NOT marching. Kept in a SEPARATE array
+  // from orgs so they never leak into the marquee, the marching grid, or the sign-up rows.
+  const supporters = [
+    { file: '../org_pics/IAIGA.jpg',          name: 'International AI Governance Alliance', website: 'https://iaiga.org/' },
+    { file: '../org_pics/Collective Action for Existential Safety.jpg', name: 'Collective Action for Existential Safety', website: 'https://ces.existentialsafety.workers.dev/' },
+    { file: '../org_pics/sapiens_first.jpg',  name: 'Sapiens First',    website: 'https://sapiensfirst.org/' },
   ];
 
   // marquee: two copies for a seamless translateX(-50%) loop.
@@ -617,7 +643,7 @@
   // otherwise the band goes blank once it scrolls past the few logos.
   const marquee = document.getElementById('marquee');
   const logoSet = orgs.map(o =>
-    `<img src="${o.file}" alt="${o.name}">`
+    `<img src="${o.file}" alt="${o.name}"><span class="sep">✊</span>`
   ).join('');
   const reps = Math.max(2, Math.ceil(window.innerWidth / 500));
   for (let copy = 0; copy < 2; copy++) {
@@ -646,6 +672,16 @@
     grid.appendChild(card);
   });
 
+  // protests — one card per org with an event, styled like the coalition list
+  const protests = document.getElementById('protests');
+  orgs.filter(o => o.event).forEach(o => {
+    const row = document.createElement('div');
+    row.className = 'signup-row';
+    row.innerHTML = `
+      <span class="signup-org">${o.name}</span>
+      <a href="${o.event}" target="_blank" rel="noopener" class="btn btn-primary">Sign up</a>`;
+    protests.appendChild(row);
+  });
   const joinCard = document.createElement('a');
   joinCard.className = 'card join-card';
   joinCard.href = 'https://forms.gle/DD8VrZaoXwbgV4b88';
@@ -654,6 +690,31 @@
   joinCard.style.transitionDelay = (orgs.length * 90) + 'ms';
   joinCard.innerHTML = `<div class="plus">+</div><div class="name">Your organization</div>`;
   grid.appendChild(joinCard);
+
+  // "Who's backing it" — render endorsers from the SEPARATE supporters array (never merged
+  // into orgs, so they cannot leak into the marquee, the marching grid (#grid), or the
+  // sign-up rows (#protests), all of which imply attendance), then the "+ Your organization" card.
+  const supportersGrid = document.getElementById('supporters-grid');
+  supporters.forEach((o, i) => {
+    const card = document.createElement('div');
+    card.className = 'card';
+    card.style.transitionDelay = (i * 90) + 'ms';
+    const links = o.website
+      ? `<div class="card-links">(<a href="${o.website}" target="_blank" rel="noopener">Website</a>)</div>`
+      : '';
+    card.innerHTML = `
+      <div class="logo-box"><img src="${o.file}" alt="${o.name}"></div>
+      <div class="name">${o.name}</div>
+      ${links}`;
+    supportersGrid.appendChild(card);
+  });
+  const endorseCard = document.createElement('a');
+  endorseCard.className = 'card join-card';
+  endorseCard.href = 'https://forms.gle/DD8VrZaoXwbgV4b88';
+  endorseCard.target = '_blank';
+  endorseCard.rel = 'noopener';
+  endorseCard.innerHTML = `<div class="plus">+</div><div class="name">Your organization</div>`;
+  supportersGrid.appendChild(endorseCard);
 
   // stamp-in on scroll
   const io = new IntersectionObserver(entries => {

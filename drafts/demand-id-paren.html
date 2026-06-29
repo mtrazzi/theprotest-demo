@@ -3,11 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>The AI Protest — theprotest.ai</title>
-<meta name="description" content="Organizations across the world are standing together against the reckless race to superintelligence. This is The AI Protest.">
-<meta property="og:title" content="The AI Protest">
-<meta property="og:description" content="Organizations across the world are standing together against the reckless race to superintelligence.">
-<meta property="og:type" content="website">
+<title>DRAFT: The AI Protest (demand: names with company in parens)</title>
+<meta name="description" content="DRAFT preview. Not the live site.">
+<meta name="robots" content="noindex">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=IBM+Plex+Mono:wght@400;600&family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
@@ -48,6 +46,20 @@
     background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
     background-repeat: repeat;
     background-size: 256px 256px;
+  }
+
+  /* ---- DRAFT BANNER (preview only, not on live site) ---- */
+  .draft-banner {
+    background: var(--paper);
+    color: var(--red);
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    text-align: center;
+    padding: 0.4rem 1rem;
+    border-bottom: 2px solid var(--red);
   }
 
   /* ---- TOP BAR ---- */
@@ -148,6 +160,32 @@
     to { opacity: 1; transform: translateY(0); }
   }
 
+  /* ---- THE DEMAND (full-width strip below the marquee) ---- */
+  .demand-strip {
+    background: var(--paper);
+    color: var(--black);
+    border-bottom: 3px solid var(--black);
+    padding: 3rem 2rem;
+    text-align: center;
+  }
+  .demand-strip .label {
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--red);
+    margin-bottom: 1rem;
+  }
+  .demand-strip .statement {
+    font-family: var(--font-body);
+    font-weight: 500;
+    font-size: clamp(1.2rem, 2.8vw, 1.9rem);
+    line-height: 1.5;
+    max-width: 820px;
+    margin: 0 auto;
+  }
+  .demand-strip .statement .hl { color: var(--red); font-weight: 700; }
+
   /* ---- MARQUEE ---- */
   .marquee-band {
     border-top: 3px solid var(--black);
@@ -178,38 +216,10 @@
     padding: 6px 10px;
     border-radius: 4px;
   }
-
-  /* ---- THE DEMAND (full-width strip below the marquee) ---- */
-  .demand-strip {
-    background: var(--paper);
-    color: var(--black);
-    border-bottom: 3px solid var(--black);
-    padding: 3rem 2rem;
-    text-align: center;
-  }
-  .demand-strip .label {
-    font-family: var(--font-mono);
-    font-size: 0.78rem;
-    letter-spacing: 0.25em;
-    text-transform: uppercase;
+  .marquee-item .sep {
+    font-family: var(--font-display);
     color: var(--red);
-    margin-bottom: 1rem;
-  }
-  .demand-strip .statement {
-    font-family: var(--font-body);
-    font-weight: 500;
-    font-size: clamp(1.2rem, 2.8vw, 1.9rem);
-    line-height: 1.5;
-    max-width: 820px;
-    margin: 0 auto;
-  }
-  .demand-strip .statement .hl { color: var(--red); font-weight: 700; }
-  .demand-strip .who {
-    font-family: var(--font-mono);
-    font-size: 0.85rem;
-    letter-spacing: 0.03em;
-    color: var(--gray);
-    margin: 1.2rem auto 0;
+    font-size: 1.4rem;
   }
 
   /* ---- COALITION ---- */
@@ -359,18 +369,9 @@
     .signup-row .btn {
       text-align: center;
     }
-    /* at least two columns on mobile so the list isn't a slow one-by-one scroll */
-    .grid {
-      grid-template-columns: repeat(2, 1fr);
-      gap: 0.75rem;
-    }
-    .card {
-      padding: 0.9rem;
-    }
   }
 
   /* ---- MARCH SCHEDULE + MAP ---- */
-  .march-cta { text-align: center; margin: 2rem 0; }
   .march { max-width: 680px; margin: 3rem auto 0; }
   .march-head {
     display: flex;
@@ -428,6 +429,26 @@
     background: var(--paper) !important;
     color: var(--black) !important;
     border-color: rgba(214,40,40,0.4) !important;
+  }
+
+  /* ---- SUPPORTERS (in solidarity, not marching) ---- */
+  .supporters {
+    padding: 0 2rem 6rem;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+  .supporters h2 {
+    font-family: var(--font-display);
+    text-transform: uppercase;
+    font-size: clamp(1.8rem, 4.5vw, 3.2rem);
+    line-height: 1.05;
+    margin-bottom: 1rem;
+  }
+  .supporters .lede {
+    max-width: 560px;
+    color: #333;
+    line-height: 1.65;
+    margin-bottom: 3.5rem;
   }
 
   /* ---- HELP SPREAD THE WORD ---- */
@@ -504,6 +525,8 @@
 </head>
 <body>
 
+<div class="draft-banner">DRAFT, not live</div>
+
 <div class="topbar">
   <div class="wordmark">The <span>AI</span> Protest</div>
   <div class="domain">theprotest.ai</div>
@@ -521,7 +544,7 @@
     to take our future back.
   </p>
   <div class="ctas">
-    <a href="https://partiful.com/e/EChgbBMsoeN3qVnATHKJ" target="_blank" rel="noopener" class="btn btn-primary">Join the protest</a>
+    <a href="#events" class="btn btn-primary">Join the protest</a>
     <a href="#coalition" class="btn btn-secondary">See who's marching</a>
   </div>
 </section>
@@ -533,19 +556,19 @@
 <section class="demand-strip" id="demand">
   <p class="label">The demand</p>
   <p class="statement">
-    Sam Altman, Dario Amodei and Demis Hassabis should commit to stop developing more
-    powerful AI <span class="hl">if every other major AI company does the same.</span>
+    Sam Altman (OpenAI), Dario Amodei (Anthropic) and Demis Hassabis (Google DeepMind) should
+    commit to stop developing more powerful AI
+    <span class="hl">if every other major AI company does the same.</span>
   </p>
-  <p class="who">The CEOs of OpenAI, Anthropic and Google DeepMind.</p>
 </section>
 
 <section class="events" id="events">
   <div class="section-label">Join us</div>
-  <h2>The March</h2>
+  <h2>Sign up to march</h2>
   <p class="lede">
-    Join us for an afternoon of music, chants and community, featuring a marching band and ending in
-    an after-party (with food) at Rincon Park!
+    Each org has its own sign-up page:
   </p>
+  <div id="protests"></div>
 
   <div class="march">
     <div class="march-head">
@@ -554,15 +577,12 @@
     </div>
     <div class="schedule">
       <div class="stop"><span class="time">12:00 PM</span><span class="what"><span class="emoji">📍</span>Rally at OpenAI<span class="addr">1455 3rd St</span></span></div>
-      <div class="stop"><span class="time">12:30 PM</span><span class="what"><span class="emoji">🗣️</span>Speeches (+music & chants) at OpenAI</span></div>
+      <div class="stop"><span class="time">12:30 PM</span><span class="what"><span class="emoji">🗣️</span>Speeches at OpenAI</span></div>
       <div class="stop"><span class="time">1:00 PM</span><span class="what"><span class="emoji">📍</span>Walk to Anthropic<span class="addr">500 Howard St</span></span></div>
-      <div class="stop"><span class="time">1:45 PM</span><span class="what"><span class="emoji">🗣️</span>Speeches (+music & chants) at Anthropic</span></div>
+      <div class="stop"><span class="time">1:45 PM</span><span class="what"><span class="emoji">🗣️</span>Speeches at Anthropic</span></div>
       <div class="stop"><span class="time">2:15 PM</span><span class="what"><span class="emoji">📍</span>Walk to Google DeepMind<span class="addr">345 Spear St</span></span></div>
-      <div class="stop"><span class="time">2:30 PM</span><span class="what"><span class="emoji">🗣️</span>Speeches (+music & chants) at Google DeepMind</span></div>
+      <div class="stop"><span class="time">2:30 PM</span><span class="what"><span class="emoji">🗣️</span>Speeches at Google DeepMind</span></div>
       <div class="stop"><span class="time">3:00 PM</span><span class="what"><span class="emoji">🎉</span>After-party at Rincon Park</span></div>
-    </div>
-    <div class="march-cta">
-      <a href="https://partiful.com/e/EChgbBMsoeN3qVnATHKJ" target="_blank" rel="noopener" class="btn btn-primary">Join the protest</a>
     </div>
     <div class="map-frame"><div id="route-map"></div></div>
   </div>
@@ -578,12 +598,22 @@
   <div class="grid" id="grid"></div>
 </section>
 
+<section class="supporters" id="supporters">
+  <div class="section-label">In solidarity</div>
+  <h2>Standing in solidarity</h2>
+  <p class="lede">
+    Organizations and public figures who stand with the march but cannot be in San Francisco
+    can endorse it in solidarity.
+  </p>
+  <div class="grid" id="supporters-grid"></div>
+</section>
+
 <section class="spread" id="spread">
   <div class="spread-box">
     <div class="section-label">Lend a hand</div>
     <h2>Help spread the word</h2>
     <p>Get announcements to forward before the march, and photos and clips to share after.</p>
-    <form class="spread-form" id="spread-form" action="https://formspree.io/f/mzdqlozp" method="POST">
+    <form class="spread-form" id="spread-form" action="[FORMSPREE_URL]" method="POST">
       <input type="email" name="email" placeholder="Your email" required>
       <button type="submit" class="btn btn-primary">Sign up</button>
     </form>
@@ -598,18 +628,21 @@
 
 <script>
   const orgs = [
-    { file: 'org_pics/stoptheairace.jpeg', name: 'Stop The AI Race', website: 'https://stoptherace.ai/',
+    { file: '../org_pics/stoptheairace.jpeg', name: 'Stop The AI Race', website: 'https://stoptherace.ai/',
       event: 'https://lu.ma/s0k8wvee?utm_source=theprotest&utm_content=protest-card' },
-    { file: 'org_pics/quitgpt.jpg',        name: 'QuitGPT',          website: 'https://quitgpt.org/' },
-    { file: 'org_pics/stopai.jpeg',        name: 'Stop AI',          website: 'https://www.stopai.info/',
+    { file: '../org_pics/quitgpt.jpg',        name: 'QuitGPT',          website: 'https://quitgpt.org/' },
+    { file: '../org_pics/stopai.jpeg',        name: 'Stop AI',          website: 'https://www.stopai.info/',
       event: 'https://lu.ma/qpw1lg0g?utm_source=theprotest&utm_content=protest-card' },
-    { file: 'org_pics/sapiens_first.jpg',  name: 'Sapiens First',    website: 'https://sapiensfirst.org/' },
-    { file: 'org_pics/pauseaius.jpg',      name: 'PauseAI US',       website: 'https://www.pauseai-us.org/' },
-    { file: 'org_pics/nuhw.jpg',           name: 'National Union of Healthcare Workers', website: 'https://home.nuhw.org/' },
-    { file: 'org_pics/IAIGA.jpg',          name: 'International AI Governance Alliance', website: 'https://iaiga.org/' },
-    { file: 'org_pics/Collective Action for Existential Safety.jpg', name: 'Collective Action for Existential Safety', website: 'https://ces.existentialsafety.workers.dev/' },
-    { file: 'org_pics/Stop Gilroy Datacenter.jpg', name: 'Stop Gilroy Datacenter Now', website: 'https://www.instagram.com/stopgilroydatacenternow/' },
-    { file: 'org_pics/rehumanize.png',     name: 'Rehumanize International', website: 'https://www.rehumanizeintl.org/' },
+    { file: '../org_pics/sapiens_first.jpg',  name: 'Sapiens First',    website: 'https://sapiensfirst.org/' },
+    { file: '../org_pics/pauseaius.jpg',      name: 'PauseAI US',       website: 'https://www.pauseai-us.org/' },
+  ];
+
+  // Supporters stand in solidarity but are NOT marching. Kept in a SEPARATE array from orgs
+  // so they can never leak into the marquee, the marching grid, the sign-up rows, or the route
+  // map. Seeded with clearly labelled placeholder samples so the layout is visible in this draft.
+  const supporters = [
+    { name: '[SAMPLE] Placeholder Org One', file: '../org_pics/quitgpt.jpg',       website: 'https://example.org/' },
+    { name: '[SAMPLE] Placeholder Org Two', file: '../org_pics/sapiens_first.jpg', website: 'https://example.org/' },
   ];
 
   // marquee: two copies for a seamless translateX(-50%) loop.
@@ -617,7 +650,7 @@
   // otherwise the band goes blank once it scrolls past the few logos.
   const marquee = document.getElementById('marquee');
   const logoSet = orgs.map(o =>
-    `<img src="${o.file}" alt="${o.name}">`
+    `<img src="${o.file}" alt="${o.name}"><span class="sep">✊</span>`
   ).join('');
   const reps = Math.max(2, Math.ceil(window.innerWidth / 500));
   for (let copy = 0; copy < 2; copy++) {
@@ -629,7 +662,7 @@
   // keep scroll speed constant: the loop distance grows with reps, so scale time too
   marquee.style.animationDuration = (28 * reps) + 's';
 
-  // coalition grid — text links under each org
+  // coalition grid: text links under each org
   const grid = document.getElementById('grid');
   orgs.forEach((o, i) => {
     const card = document.createElement('div');
@@ -646,6 +679,16 @@
     grid.appendChild(card);
   });
 
+  // protests: one card per org with an event, styled like the coalition list
+  const protests = document.getElementById('protests');
+  orgs.filter(o => o.event).forEach(o => {
+    const row = document.createElement('div');
+    row.className = 'signup-row';
+    row.innerHTML = `
+      <span class="signup-org">${o.name}</span>
+      <a href="${o.event}" target="_blank" rel="noopener" class="btn btn-primary">Sign up</a>`;
+    protests.appendChild(row);
+  });
   const joinCard = document.createElement('a');
   joinCard.className = 'card join-card';
   joinCard.href = 'https://forms.gle/DD8VrZaoXwbgV4b88';
@@ -655,6 +698,31 @@
   joinCard.innerHTML = `<div class="plus">+</div><div class="name">Your organization</div>`;
   grid.appendChild(joinCard);
 
+  // Standing in solidarity: render the SEPARATE supporters array into #supporters-grid only.
+  // This grid is never the marquee, the marching grid, the sign-up rows, or the route map.
+  const supportersGrid = document.getElementById('supporters-grid');
+  supporters.forEach((s, i) => {
+    const card = document.createElement('div');
+    card.className = 'card';
+    card.style.transitionDelay = (i * 90) + 'ms';
+    const link = s.website
+      ? `<div class="card-links">(<a href="${s.website}" target="_blank" rel="noopener">Website</a>)</div>`
+      : '';
+    card.innerHTML = `
+      <div class="logo-box"><img src="${s.file}" alt="${s.name}"></div>
+      <div class="name">${s.name}</div>
+      ${link}`;
+    supportersGrid.appendChild(card);
+  });
+  const endorseCard = document.createElement('a');
+  endorseCard.className = 'card join-card';
+  endorseCard.href = 'https://forms.gle/DD8VrZaoXwbgV4b88';
+  endorseCard.target = '_blank';
+  endorseCard.rel = 'noopener';
+  endorseCard.style.transitionDelay = (supporters.length * 90) + 'ms';
+  endorseCard.innerHTML = `<div class="plus">+</div><div class="name">Your organization</div>`;
+  supportersGrid.appendChild(endorseCard);
+
   // stamp-in on scroll
   const io = new IntersectionObserver(entries => {
     entries.forEach(e => {
@@ -663,7 +731,7 @@
   }, { threshold: 0.15 });
   document.querySelectorAll('.card').forEach(c => io.observe(c));
 
-  // "Help spread the word" capture: POST to Formspree, swap to a thank-you on success.
+  // "Help spread the word" capture: POST to the form action, swap to a thank-you on success.
   // Separate list from the org signup form; mirrors stoptherace.ai's fetch-based handler.
   const spreadForm = document.getElementById('spread-form');
   const spreadThanks = document.getElementById('spread-thanks');
@@ -686,7 +754,7 @@
 
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script>
-  // march route map — OpenAI → Anthropic → Google DeepMind
+  // march route map: OpenAI to Anthropic to Google DeepMind
   (function () {
     if (!window.L || !document.getElementById('route-map')) return;
 

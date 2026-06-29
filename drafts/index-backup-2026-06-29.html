@@ -370,7 +370,6 @@
   }
 
   /* ---- MARCH SCHEDULE + MAP ---- */
-  .march-cta { text-align: center; margin: 2rem 0; }
   .march { max-width: 680px; margin: 3rem auto 0; }
   .march-head {
     display: flex;
@@ -428,6 +427,26 @@
     background: var(--paper) !important;
     color: var(--black) !important;
     border-color: rgba(214,40,40,0.4) !important;
+  }
+
+  /* ---- SUPPORTERS (endorsing, not marching) ---- */
+  .supporters {
+    padding: 0 2rem 6rem;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+  .supporters h2 {
+    font-family: var(--font-display);
+    text-transform: uppercase;
+    font-size: clamp(1.8rem, 4.5vw, 3.2rem);
+    line-height: 1.05;
+    margin-bottom: 1rem;
+  }
+  .supporters .lede {
+    max-width: 560px;
+    color: #333;
+    line-height: 1.65;
+    margin-bottom: 3.5rem;
   }
 
   /* ---- HELP SPREAD THE WORD ---- */
@@ -521,7 +540,7 @@
     to take our future back.
   </p>
   <div class="ctas">
-    <a href="https://partiful.com/e/EChgbBMsoeN3qVnATHKJ" target="_blank" rel="noopener" class="btn btn-primary">Join the protest</a>
+    <a href="#events" class="btn btn-primary">Join the protest</a>
     <a href="#coalition" class="btn btn-secondary">See who's marching</a>
   </div>
 </section>
@@ -541,11 +560,11 @@
 
 <section class="events" id="events">
   <div class="section-label">Join us</div>
-  <h2>The March</h2>
+  <h2>Sign up to march</h2>
   <p class="lede">
-    Join us for an afternoon of music, chants and community, featuring a marching band and ending in
-    an after-party (with food) at Rincon Park!
+    Each org has its own sign-up page:
   </p>
+  <div id="protests"></div>
 
   <div class="march">
     <div class="march-head">
@@ -554,15 +573,12 @@
     </div>
     <div class="schedule">
       <div class="stop"><span class="time">12:00 PM</span><span class="what"><span class="emoji">📍</span>Rally at OpenAI<span class="addr">1455 3rd St</span></span></div>
-      <div class="stop"><span class="time">12:30 PM</span><span class="what"><span class="emoji">🗣️</span>Speeches (+music & chants) at OpenAI</span></div>
+      <div class="stop"><span class="time">12:30 PM</span><span class="what"><span class="emoji">🗣️</span>Speeches at OpenAI</span></div>
       <div class="stop"><span class="time">1:00 PM</span><span class="what"><span class="emoji">📍</span>Walk to Anthropic<span class="addr">500 Howard St</span></span></div>
-      <div class="stop"><span class="time">1:45 PM</span><span class="what"><span class="emoji">🗣️</span>Speeches (+music & chants) at Anthropic</span></div>
+      <div class="stop"><span class="time">1:45 PM</span><span class="what"><span class="emoji">🗣️</span>Speeches at Anthropic</span></div>
       <div class="stop"><span class="time">2:15 PM</span><span class="what"><span class="emoji">📍</span>Walk to Google DeepMind<span class="addr">345 Spear St</span></span></div>
-      <div class="stop"><span class="time">2:30 PM</span><span class="what"><span class="emoji">🗣️</span>Speeches (+music & chants) at Google DeepMind</span></div>
+      <div class="stop"><span class="time">2:30 PM</span><span class="what"><span class="emoji">🗣️</span>Speeches at Google DeepMind</span></div>
       <div class="stop"><span class="time">3:00 PM</span><span class="what"><span class="emoji">🎉</span>After-party at Rincon Park</span></div>
-    </div>
-    <div class="march-cta">
-      <a href="https://partiful.com/e/EChgbBMsoeN3qVnATHKJ" target="_blank" rel="noopener" class="btn btn-primary">Join the protest</a>
     </div>
     <div class="map-frame"><div id="route-map"></div></div>
   </div>
@@ -576,6 +592,16 @@
     Different harms, different strategies, one demand: stop developing more advanced AI without our consent.
   </p>
   <div class="grid" id="grid"></div>
+</section>
+
+<section class="supporters" id="supporters">
+  <div class="section-label">In solidarity</div>
+  <h2>Who's backing it</h2>
+  <p class="lede">
+    Organizations and public figures who stand with the march but cannot be in San Francisco
+    can endorse it in solidarity.
+  </p>
+  <div class="grid" id="supporters-grid"></div>
 </section>
 
 <section class="spread" id="spread">
@@ -646,6 +672,16 @@
     grid.appendChild(card);
   });
 
+  // protests — one card per org with an event, styled like the coalition list
+  const protests = document.getElementById('protests');
+  orgs.filter(o => o.event).forEach(o => {
+    const row = document.createElement('div');
+    row.className = 'signup-row';
+    row.innerHTML = `
+      <span class="signup-org">${o.name}</span>
+      <a href="${o.event}" target="_blank" rel="noopener" class="btn btn-primary">Sign up</a>`;
+    protests.appendChild(row);
+  });
   const joinCard = document.createElement('a');
   joinCard.className = 'card join-card';
   joinCard.href = 'https://forms.gle/DD8VrZaoXwbgV4b88';
@@ -654,6 +690,19 @@
   joinCard.style.transitionDelay = (orgs.length * 90) + 'ms';
   joinCard.innerHTML = `<div class="plus">+</div><div class="name">Your organization</div>`;
   grid.appendChild(joinCard);
+
+  // "Who's backing it" holds a single "+ Your organization" card for now (no endorsers
+  // confirmed yet). When backers are ready, render them into #supporters-grid from a SEPARATE
+  // supporters array, never merged into orgs, so they cannot leak into the marquee, the
+  // marching grid (#grid), or the sign-up rows (#protests), all of which imply attendance.
+  const supportersGrid = document.getElementById('supporters-grid');
+  const endorseCard = document.createElement('a');
+  endorseCard.className = 'card join-card';
+  endorseCard.href = 'https://forms.gle/DD8VrZaoXwbgV4b88';
+  endorseCard.target = '_blank';
+  endorseCard.rel = 'noopener';
+  endorseCard.innerHTML = `<div class="plus">+</div><div class="name">Your organization</div>`;
+  supportersGrid.appendChild(endorseCard);
 
   // stamp-in on scroll
   const io = new IntersectionObserver(entries => {
