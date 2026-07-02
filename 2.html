@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex">
+<title>The AI Protest</title>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-6FJG17H65T"></script>
+<script>
+  var DEST = 'https://partiful.com/e/EChgbBMsoeN3qVnATHKJ';
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-6FJG17H65T', { transport_type: 'beacon' });
+
+  var redirected = false;
+  function go() {
+    if (redirected) return;
+    redirected = true;
+    window.location.replace(DEST);
+  }
+  gtag('event', 'poster_scan', {
+    poster: '2',
+    transport_type: 'beacon',
+    event_callback: go,
+    event_timeout: 1000
+  });
+  // Fallback in case GA is blocked or slow
+  setTimeout(go, 1200);
+</script>
+<noscript><meta http-equiv="refresh" content="0;url=https://partiful.com/e/EChgbBMsoeN3qVnATHKJ"></noscript>
+<style>
+  body { font-family: 'Inter', sans-serif; background: #f2eee6; color: #111;
+         display: flex; align-items: center; justify-content: center; min-height: 100vh; margin: 0; }
+  a { color: #d62828; }
+</style>
+</head>
+<body>
+<p>Taking you to the event&hellip; <a href="https://partiful.com/e/EChgbBMsoeN3qVnATHKJ">Tap here if nothing happens.</a></p>
+</body>
+</html>
