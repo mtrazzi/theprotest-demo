@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Media Advisory · The AI Protest</title>
+<meta name="description" content="Media advisory: AI coalition to march on Google, OpenAI and Anthropic, demand halt to AI development without public consent. July 11, 2026, San Francisco.">
+<meta property="og:title" content="Media Advisory · The AI Protest">
+<meta property="og:description" content="AI coalition to march on Google, OpenAI and Anthropic, demand halt to AI development without public consent.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://theprotest.ai/press/draft">
+<meta property="og:image" content="https://stoptherace.ai/media-kit/rachel_shu_5.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://stoptherace.ai/media-kit/rachel_shu_5.jpg">
+<meta name="robots" content="noindex">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-6FJG17H65T"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-6FJG17H65T');
+  document.addEventListener('click', function (e) {
+    var link = e.target.closest && e.target.closest('a[href*="partiful.com"]');
+    if (link) gtag('event', 'partiful_click', { transport_type: 'beacon' });
+  });
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=IBM+Plex+Mono:wght@400;600&family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --black: #111111;
+    --paper: #f2eee6;
+    --red: #d62828;
+    --red-dark: #a31f1f;
+    --gray: #6b6b6b;
+    --font-display: 'Archivo Black', sans-serif;
+    --font-body: 'Inter', sans-serif;
+    --font-mono: 'IBM Plex Mono', monospace;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  ::selection { background: var(--red); color: var(--paper); }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--paper);
+    color: var(--black);
+    font-family: var(--font-body);
+    overflow-x: hidden;
+  }
+
+  /* grain overlay */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    pointer-events: none;
+    opacity: 0.05;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+    background-repeat: repeat;
+    background-size: 256px 256px;
+  }
+
+  a { color: var(--red); text-decoration: none; transition: all 0.2s ease; }
+  a:hover { color: var(--red-dark); text-decoration: underline; }
+
+  /* BACK NAV */
+  .back-nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 900;
+    padding: 1.2rem 2rem;
+    background: rgba(242, 238, 230, 0.9);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 3px solid var(--black);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .back-link {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--gray);
+    text-decoration: none;
+  }
+
+  .back-link:hover { color: var(--black); text-decoration: none; }
+
+  .nav-label {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gray);
+  }
+
+  /* PRESS HEADER */
+  .press-header {
+    padding: 8rem 2rem 3rem;
+    text-align: center;
+    position: relative;
+  }
+
+  .press-header::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 10%;
+    right: 10%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(214,40,40,0.5), transparent);
+  }
+
+  .press-label {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--red);
+    margin-bottom: 0.6rem;
+  }
+
+  .press-date {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    color: var(--gray);
+    letter-spacing: 0.05em;
+    margin-bottom: 1.8rem;
+  }
+
+  .press-title {
+    font-family: var(--font-display);
+    text-transform: uppercase;
+    font-size: clamp(1.5rem, 4vw, 2.5rem);
+    line-height: 1.18;
+    letter-spacing: -0.01em;
+    max-width: 900px;
+    margin: 0 auto;
+    animation: fadeUp 0.8s 0.1s ease both;
+  }
+
+  .press-title .red { color: var(--red); }
+
+  .press-contact {
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    color: var(--gray);
+    margin-top: 1.6rem;
+    letter-spacing: 0.04em;
+    line-height: 1.7;
+    animation: fadeUp 0.8s 0.2s ease both;
+  }
+
+  .press-contact strong {
+    color: var(--black);
+    font-weight: 600;
+  }
+
+  /* HERO IMAGE */
+  .press-hero-image {
+    max-width: 800px;
+    margin: 3rem auto 0;
+    padding: 0 2rem;
+    animation: fadeUp 0.8s 0.3s ease both;
+  }
+
+  .press-hero-image img {
+    width: 100%;
+    height: auto;
+    display: block;
+    border: 3px solid var(--black);
+  }
+
+  .press-hero-caption {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    color: var(--gray);
+    text-align: center;
+    margin-top: 0.75rem;
+    letter-spacing: 0.03em;
+    line-height: 1.6;
+  }
+
+  /* PRESS BODY */
+  .press-body {
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 3rem 2rem 5rem;
+  }
+
+  .press-body p {
+    font-size: 1.02rem;
+    line-height: 1.8;
+    margin-bottom: 1.5rem;
+    color: #2a2a2a;
+  }
+
+  .press-body p strong { color: var(--black); font-weight: 700; }
+
+  /* ADVISORY FACT ROWS */
+  .advisory {
+    margin: 0 0 2.5rem;
+  }
+
+  .advisory-row {
+    display: flex;
+    gap: 1.5rem;
+    padding: 1.3rem 0;
+    border-bottom: 1px solid rgba(17, 17, 17, 0.12);
+    align-items: baseline;
+  }
+
+  .advisory-row:first-child { border-top: 3px solid var(--black); }
+  .advisory-row:last-child { border-bottom: 3px solid var(--black); }
+
+  .advisory-label {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--red);
+    min-width: 6.5rem;
+    flex-shrink: 0;
+  }
+
+  .advisory-content {
+    font-size: 1rem;
+    line-height: 1.75;
+    color: #2a2a2a;
+  }
+
+  .advisory-content p { margin-bottom: 1rem !important; font-size: 1rem !important; }
+  .advisory-content p:last-child { margin-bottom: 0 !important; }
+
+  /* COMPACT COALITION LOGOS */
+  .press-orgs {
+    margin: 2.5rem 0;
+    text-align: center;
+  }
+
+  .press-orgs .orgs-title {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--red);
+    margin-bottom: 1.2rem;
+    font-weight: 600;
+  }
+
+  .orgs-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.6rem;
+  }
+
+  .org-tile {
+    background: #fff;
+    border: 2px solid var(--black);
+    width: 74px;
+    height: 74px;
+    flex: 0 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.45rem;
+    transition: box-shadow 0.2s ease, transform 0.2s ease;
+  }
+
+  .org-tile:hover {
+    box-shadow: 4px 4px 0 var(--red);
+    transform: translateY(-2px);
+    text-decoration: none;
+  }
+
+  .org-tile img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    display: block;
+  }
+
+  /* CONTACT BLOCK */
+  .contact-block {
+    margin: 2.5rem 0 0;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(17, 17, 17, 0.15);
+  }
+
+  .contact-block h3 {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--red);
+    margin-bottom: 1.2rem;
+    font-weight: 600;
+  }
+
+  .contact-block p {
+    font-size: 0.95rem !important;
+    line-height: 1.8 !important;
+    color: #444 !important;
+    margin-bottom: 0 !important;
+  }
+
+  .contact-block a { border-bottom: 1px dotted var(--red); }
+  .contact-block a:hover { text-decoration: none; border-bottom-style: solid; }
+
+  /* FOOTER CTA */
+  .press-footer-cta {
+    text-align: center;
+    padding: 4rem 2rem 5rem;
+    position: relative;
+  }
+
+  .press-footer-cta::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 10%;
+    right: 10%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(214,40,40,0.4), transparent);
+  }
+
+  .press-footer-cta .cta-primary {
+    display: inline-block;
+    font-family: var(--font-mono);
+    font-weight: 600;
+    font-size: 0.9rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    text-decoration: none;
+    background: var(--red);
+    color: var(--paper);
+    padding: 1.1rem 3rem;
+    border: 3px solid var(--black);
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+
+  .press-footer-cta .cta-primary:hover {
+    background: var(--red-dark);
+    box-shadow: 6px 6px 0 var(--black);
+    transform: translateY(-2px);
+    color: var(--paper);
+    text-decoration: none;
+  }
+
+  .press-footer-cta p {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--gray);
+    margin-top: 1.2rem;
+    letter-spacing: 0.05em;
+  }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(15px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+  }
+
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  /* MOBILE */
+  @media (max-width: 600px) {
+    .press-header { padding: 7rem 1.5rem 2.5rem; }
+    .press-body { padding: 2.5rem 1.5rem 4rem; }
+    .advisory-row { flex-direction: column; gap: 0.5rem; }
+    .org-tile { width: 60px; height: 60px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- BACK NAV -->
+<nav class="back-nav">
+  <a href="/" class="back-link">&larr; theprotest.ai</a>
+  <span class="nav-label">Media Advisory</span>
+</nav>
+
+<!-- HEADER -->
+<header class="press-header">
+  <p class="press-label">For Immediate Release</p>
+  <p class="press-date">July 7, 2026</p>
+  <h1 class="press-title">AI Coalition to March on Google, OpenAI and Anthropic, Demand <span class="red">Halt to AI Development Without Public Consent</span></h1>
+  <p class="press-contact">
+    <strong>Media Contact:</strong> Michael Ceraso &middot; <a href="mailto:michael@yourwinningmargins.org">michael@yourwinningmargins.org</a>
+  </p>
+</header>
+
+<!-- HERO IMAGE -->
+<div class="press-hero-image">
+  <img src="https://stoptherace.ai/media-kit/rachel_shu_5.jpg" alt="Stop the AI Race march in San Francisco, March 21, 2026">
+  <p class="press-hero-caption">Stop the AI Race march, San Francisco, March 21, 2026. Photo by Rachel Shu.</p>
+</div>
+
+<!-- PRESS BODY -->
+<article class="press-body reveal">
+
+  <!-- ADVISORY FACTS -->
+  <div class="advisory">
+    <div class="advisory-row">
+      <span class="advisory-label">What</span>
+      <div class="advisory-content">
+        <p>Stop the AI Race, QuitGPT, Food &amp; Water Watch, the National Union of Healthcare Workers, Stop Gilroy Datacenter Now and AI Action will gather at 1455 3rd St. in San Francisco on Saturday, July 11, before marching to Google, OpenAI and Anthropic to demand the companies halt development of more advanced AI without public consent.</p>
+        <p>The coalition represents a growing campaign to curb corporate power and stop companies from developing increasingly powerful AI without meaningful public oversight and accountability.</p>
+      </div>
+    </div>
+    <div class="advisory-row">
+      <span class="advisory-label">When</span>
+      <div class="advisory-content">Saturday, July 11, noon&ndash;3 p.m.</div>
+    </div>
+    <div class="advisory-row">
+      <span class="advisory-label">Where</span>
+      <div class="advisory-content">1455 3rd St., San Francisco</div>
+    </div>
+    <div class="advisory-row">
+      <span class="advisory-label">Who</span>
+      <div class="advisory-content">Stop the AI Race, QuitGPT, Food &amp; Water Watch, the National Union of Healthcare Workers, Stop Gilroy Datacenter Now and AI Action.</div>
+    </div>
+    <div class="advisory-row">
+      <span class="advisory-label">Visuals</span>
+      <div class="advisory-content">Protesters carrying signs and banners marching to Google, OpenAI and Anthropic, stopping outside each company for speeches and chants.</div>
+    </div>
+    <div class="advisory-row">
+      <span class="advisory-label">RSVP</span>
+      <div class="advisory-content">To arrange interviews or request additional information, contact Michael Ceraso at <a href="mailto:michael@yourwinningmargins.org">michael@yourwinningmargins.org</a>.</div>
+    </div>
+  </div>
+
+  <!-- COMPACT COALITION LOGOS -->
+  <div class="press-orgs">
+    <p class="orgs-title">The Coalition</p>
+    <div class="orgs-grid">
+      <a class="org-tile" href="https://stoptherace.ai/" target="_blank" rel="noopener" title="Stop The AI Race"><img src="../../org_pics/stoptheairace.jpeg" alt="Stop The AI Race" loading="lazy"></a>
+      <a class="org-tile" href="https://quitgpt.org/" target="_blank" rel="noopener" title="QuitGPT"><img src="../../org_pics/quitgpt.jpg" alt="QuitGPT" loading="lazy"></a>
+      <a class="org-tile" href="https://www.foodandwaterwatch.org/" target="_blank" rel="noopener" title="Food &amp; Water Watch"><img src="../../org_pics/food and water watch.jpg" alt="Food &amp; Water Watch" loading="lazy"></a>
+      <a class="org-tile" href="https://home.nuhw.org/" target="_blank" rel="noopener" title="National Union of Healthcare Workers"><img src="../../org_pics/nuhw.jpg" alt="National Union of Healthcare Workers" loading="lazy"></a>
+      <a class="org-tile" href="https://www.instagram.com/stopgilroydatacenternow/" target="_blank" rel="noopener" title="Stop Gilroy Datacenter Now"><img src="../../org_pics/Stop Gilroy Datacenter.jpg" alt="Stop Gilroy Datacenter Now" loading="lazy"></a>
+      <a class="org-tile" href="https://www.instagram.com/aiactionnow" target="_blank" rel="noopener" title="AI Action"><img src="../../org_pics/aiactionnow.jpg" alt="AI Action" loading="lazy"></a>
+    </div>
+  </div>
+
+  <!-- MEDIA -->
+  <div class="contact-block">
+    <h3>Media</h3>
+    <p>Photo opportunities and b-roll will be made available on site. Photos from previous marches are available in the <a href="https://stoptherace.ai/press" target="_blank" rel="noopener">Stop the AI Race press kit</a>.</p>
+  </div>
+
+</article>
+
+<!-- FOOTER CTA -->
+<div class="press-footer-cta">
+  <a href="https://partiful.com/e/EChgbBMsoeN3qVnATHKJ?utm_source=press" target="_blank" rel="noopener" class="cta-primary">Join the Protest</a>
+  <p>Saturday, July 11 &middot; San Francisco</p>
+</div>
+
+<script>
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.05 });
+  reveals.forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
