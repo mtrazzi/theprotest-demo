@@ -4,9 +4,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>The AI Protest — theprotest.ai</title>
-<meta name="description" content="Organizations across the world are standing together against the reckless race to superintelligence. This is The AI Protest.">
+<meta name="description" content="Organizations across the world stood together against the reckless race to superintelligence. This is The AI Protest.">
 <meta property="og:title" content="The AI Protest">
-<meta property="og:description" content="Organizations across the world are standing together against the reckless race to superintelligence.">
+<meta property="og:description" content="Organizations across the world stood together against the reckless race to superintelligence.">
 <meta property="og:type" content="website">
 <meta property="og:image" content="https://theprotest.ai/img/social-media/theprotest.ai-social-media-og-image-6.png">
 <meta property="og:image:width" content="1200" />
@@ -449,6 +449,83 @@
     border-color: rgba(214,40,40,0.4) !important;
   }
 
+  /* ---- MEDIA KIT ---- */
+  .media-kit {
+    padding: 6rem 2rem 2rem;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+  .media-kit h2 {
+    font-family: var(--font-display);
+    text-transform: uppercase;
+    font-size: clamp(1.8rem, 4.5vw, 3.2rem);
+    line-height: 1.05;
+    margin-bottom: 1rem;
+  }
+  .media-kit .lede {
+    max-width: 560px;
+    color: #333;
+    line-height: 1.65;
+    margin-bottom: 3rem;
+  }
+  .carousel {
+    position: relative;
+    border: 3px solid var(--black);
+    background: var(--black);
+    overflow: hidden;
+  }
+  .carousel-track {
+    display: flex;
+    transition: transform 0.45s cubic-bezier(0.2, 0.7, 0.3, 1);
+  }
+  .carousel-slide { flex: 0 0 100%; }
+  .carousel-slide img {
+    width: 100%;
+    height: clamp(280px, 55vw, 520px);
+    object-fit: cover;
+    display: block;
+  }
+  .carousel-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    font-family: var(--font-mono);
+    font-size: 1.6rem;
+    line-height: 1;
+    width: 46px;
+    height: 46px;
+    background: var(--paper);
+    color: var(--black);
+    border: 3px solid var(--black);
+    cursor: pointer;
+    z-index: 2;
+  }
+  .carousel-btn:hover { background: var(--red); color: var(--paper); border-color: var(--red); }
+  .carousel-btn--prev { left: 12px; }
+  .carousel-btn--next { right: 12px; }
+  .carousel-dots {
+    display: flex;
+    justify-content: center;
+    gap: 0.6rem;
+    margin-top: 1.2rem;
+  }
+  .carousel-dot {
+    width: 12px;
+    height: 12px;
+    background: transparent;
+    border: 2px solid var(--black);
+    cursor: pointer;
+    padding: 0;
+  }
+  .carousel-dot.active { background: var(--red); border-color: var(--red); }
+  .media-kit-credit {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    color: var(--gray);
+    text-align: center;
+    margin-top: 0.8rem;
+  }
+
   /* ---- HELP SPREAD THE WORD ---- */
   .spread {
     padding: 0 2rem 6rem;
@@ -536,12 +613,12 @@
   </h1>
   <p class="sub">
     A handful of AI companies are deciding the future for all of us, with little regard for our
-    safety, our livelihoods, or our consent. Organizations across the country are standing together
+    safety, our livelihoods, or our consent. Organizations across the country stood together
     on July 11 to take our future back.
   </p>
   <div class="ctas">
-    <a href="https://partiful.com/e/EChgbBMsoeN3qVnATHKJ" target="_blank" rel="noopener" class="btn btn-primary">Join the protest</a>
-    <a href="#coalition" class="btn btn-secondary">See who's marching</a>
+    <a href="#media-kit" class="btn btn-primary">See the photos</a>
+    <a href="#coalition" class="btn btn-secondary">See who marched</a>
   </div>
 </section>
 
@@ -559,11 +636,11 @@
 </section>
 
 <section class="events" id="events">
-  <div class="section-label">Join us</div>
+  <div class="section-label">What happened</div>
   <h2>The March</h2>
   <p class="lede">
-    Join us for an afternoon of music, chants and community, featuring a marching band and ending in
-    an after-party (with food) at Rincon Park!
+    On July 11, we gathered for an afternoon of music, chants and community, featuring a marching
+    band and ending in an after-party (with food) at Rincon Park.
   </p>
 
   <div class="march">
@@ -581,15 +658,39 @@
       <div class="stop"><span class="time">3:00 PM</span><span class="what"><span class="emoji">🎉</span>After-party at Rincon Park</span></div>
     </div>
     <div class="march-cta">
-      <a href="https://partiful.com/e/EChgbBMsoeN3qVnATHKJ" target="_blank" rel="noopener" class="btn btn-primary">Join the protest</a>
+      <a href="#media-kit" class="btn btn-primary">See the photos</a>
     </div>
     <div class="map-frame"><div id="route-map"></div></div>
   </div>
 </section>
 
+<section class="media-kit" id="media-kit">
+  <div class="section-label">Media kit</div>
+  <h2>The Photos</h2>
+  <p class="lede">
+    Photos from the July 11 march on OpenAI, Anthropic and Google DeepMind.
+    Please credit the photographer when using these photos.
+  </p>
+  <div class="carousel" id="media-carousel">
+    <div class="carousel-track" id="carousel-track">
+      <div class="carousel-slide"><img src="media-kit/rachel_bujalski_1_web.jpg" alt="March photo by Rachel Bujalski" loading="lazy"></div>
+      <div class="carousel-slide"><img src="media-kit/rachel_bujalski_2_web.jpg" alt="March photo by Rachel Bujalski" loading="lazy"></div>
+      <div class="carousel-slide"><img src="media-kit/rachel_bujalski_3_web.jpg" alt="March photo by Rachel Bujalski" loading="lazy"></div>
+      <div class="carousel-slide"><img src="media-kit/rachel_bujalski_4_web.jpg" alt="March photo by Rachel Bujalski" loading="lazy"></div>
+      <div class="carousel-slide"><img src="media-kit/camille_elize_cohen_1_web.jpg" alt="March photo by Camille Elize Cohen" loading="lazy"></div>
+      <div class="carousel-slide"><img src="media-kit/camille_elize_cohen_2_web.jpg" alt="March photo by Camille Elize Cohen" loading="lazy"></div>
+      <div class="carousel-slide"><img src="media-kit/camille_elize_cohen_3_web.jpg" alt="March photo by Camille Elize Cohen" loading="lazy"></div>
+    </div>
+    <button class="carousel-btn carousel-btn--prev" id="carousel-prev" aria-label="Previous photo">&#8249;</button>
+    <button class="carousel-btn carousel-btn--next" id="carousel-next" aria-label="Next photo">&#8250;</button>
+  </div>
+  <div class="carousel-dots" id="carousel-dots"></div>
+  <p class="media-kit-credit" id="carousel-credit"></p>
+</section>
+
 <section class="coalition" id="coalition">
   <div class="section-label">The coalition</div>
-  <h2>Who's marching</h2>
+  <h2>Who marched</h2>
   <p class="lede">
     Labor displacement. Surveillance. Bias. Stolen work. Existential risk.
     Different harms, different strategies, one demand: stop developing more advanced AI without our consent.
@@ -601,12 +702,12 @@
   <div class="spread-box">
     <div class="section-label">Lend a hand</div>
     <h2>Help spread the word</h2>
-    <p>Get announcements to forward before the march, and photos and clips to share after.</p>
+    <p>Get photos and clips from the march to share, and announcements about what's next.</p>
     <form class="spread-form" id="spread-form" action="https://formspree.io/f/mzdqlozp" method="POST">
       <input type="email" name="email" placeholder="Your email" required>
       <button type="submit" class="btn btn-primary">Sign up</button>
     </form>
-    <p class="spread-thanks" id="spread-thanks">Thanks. Watch your inbox before the march.</p>
+    <p class="spread-thanks" id="spread-thanks">Thanks. Watch your inbox.</p>
   </div>
 </section>
 
@@ -684,6 +785,60 @@
     });
   }, { threshold: 0.15 });
   document.querySelectorAll('.card').forEach(c => io.observe(c));
+
+  // Media kit carousel — mirrors stoptherace.ai's press-kit carousel
+  (function () {
+    const track = document.getElementById('carousel-track');
+    const slides = track.querySelectorAll('.carousel-slide');
+    const prevBtn = document.getElementById('carousel-prev');
+    const nextBtn = document.getElementById('carousel-next');
+    const dotsContainer = document.getElementById('carousel-dots');
+    const creditEl = document.getElementById('carousel-credit');
+    let current = 0;
+    const total = slides.length;
+
+    const credits = {
+      'rachel_bujalski': 'Photo by Rachel Bujalski',
+      'camille_elize_cohen': 'Photo by Camille Elize Cohen'
+    };
+
+    function getCredit(index) {
+      const src = slides[index].querySelector('img').src;
+      for (const [key, val] of Object.entries(credits)) {
+        if (src.includes(key)) return val;
+      }
+      return '';
+    }
+
+    for (let i = 0; i < total; i++) {
+      const dot = document.createElement('button');
+      dot.classList.add('carousel-dot');
+      if (i === 0) dot.classList.add('active');
+      dot.setAttribute('aria-label', 'Photo ' + (i + 1));
+      dot.addEventListener('click', () => goTo(i));
+      dotsContainer.appendChild(dot);
+    }
+
+    function goTo(index) {
+      current = ((index % total) + total) % total;
+      track.style.transform = 'translateX(-' + (current * 100) + '%)';
+      dotsContainer.querySelectorAll('.carousel-dot').forEach((d, i) => {
+        d.classList.toggle('active', i === current);
+      });
+      creditEl.textContent = getCredit(current);
+    }
+
+    prevBtn.addEventListener('click', () => goTo(current - 1));
+    nextBtn.addEventListener('click', () => goTo(current + 1));
+    creditEl.textContent = getCredit(0);
+
+    let startX = 0;
+    track.addEventListener('touchstart', (e) => { startX = e.touches[0].clientX; }, { passive: true });
+    track.addEventListener('touchend', (e) => {
+      const diff = startX - e.changedTouches[0].clientX;
+      if (Math.abs(diff) > 50) goTo(current + (diff > 0 ? 1 : -1));
+    });
+  })();
 
   // "Help spread the word" capture: POST to Formspree, swap to a thank-you on success.
   // Separate list from the org signup form; mirrors stoptherace.ai's fetch-based handler.
