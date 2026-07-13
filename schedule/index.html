@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Schedule · The AI Protest</title>
+<meta name="description" content="Who spoke at the July 11 march on OpenAI, Anthropic, and Google DeepMind.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=IBM+Plex+Mono:wght@400;600&family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --black: #111111;
+    --paper: #f2eee6;
+    --red: #d62828;
+    --gray: #6b6b6b;
+    --font-display: 'Archivo Black', sans-serif;
+    --font-body: 'Inter', sans-serif;
+    --font-mono: 'IBM Plex Mono', monospace;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  ::selection { background: var(--red); color: var(--paper); }
+  body {
+    background: var(--paper);
+    color: var(--black);
+    font-family: var(--font-body);
+    overflow-x: hidden;
+  }
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    pointer-events: none;
+    opacity: 0.05;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+    background-repeat: repeat;
+    background-size: 256px 256px;
+  }
+  .topbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.2rem 2rem;
+    border-bottom: 3px solid var(--black);
+    background: var(--paper);
+  }
+  .topbar .wordmark {
+    font-family: var(--font-display);
+    font-size: 1.05rem;
+    text-transform: uppercase;
+    color: var(--black);
+    text-decoration: none;
+  }
+  .topbar .wordmark span { color: var(--red); }
+  .topbar .domain {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    color: var(--gray);
+  }
+  .page-head {
+    text-align: center;
+    padding: 4rem 2rem 3rem;
+  }
+  .page-head .kicker {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--red);
+    margin-bottom: 1rem;
+  }
+  .page-head h1 {
+    font-family: var(--font-display);
+    text-transform: uppercase;
+    font-size: clamp(2.2rem, 7vw, 4.5rem);
+    line-height: 1;
+  }
+  .page-head .sub {
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    color: var(--gray);
+    margin-top: 1rem;
+    letter-spacing: 0.05em;
+  }
+  .schedule-wrap {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 0 2rem 5rem;
+  }
+  .venue {
+    border: 3px solid var(--black);
+    background: #fff;
+    margin-bottom: 1.4rem;
+  }
+  .venue-head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 0.4rem 1rem;
+    border-bottom: 3px solid var(--black);
+    background: var(--black);
+    color: var(--paper);
+    padding: 0.8rem 1.2rem;
+  }
+  .venue-head .name {
+    font-family: var(--font-display);
+    text-transform: uppercase;
+    font-size: 1.05rem;
+  }
+  .venue-head .when {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    color: rgba(242,238,230,0.6);
+    letter-spacing: 0.05em;
+  }
+  .speaker {
+    display: flex;
+    gap: 1rem;
+    align-items: baseline;
+    padding: 0.85rem 1.2rem;
+    border-bottom: 1px solid rgba(17,17,17,0.12);
+  }
+  .speaker:last-child { border-bottom: none; }
+  .speaker .time {
+    font-family: var(--font-mono);
+    font-weight: 600;
+    font-size: 0.8rem;
+    color: var(--red);
+    min-width: 64px;
+    flex-shrink: 0;
+  }
+  .speaker .who { font-size: 0.95rem; line-height: 1.5; }
+  .speaker .who a {
+    color: var(--black);
+    font-weight: 700;
+    text-decoration: none;
+    border-bottom: 2px solid var(--red);
+  }
+  .speaker .who a:hover { color: var(--red); }
+  .speaker .role {
+    color: var(--gray);
+    font-size: 0.85rem;
+  }
+  .tag {
+    display: inline-block;
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--paper);
+    background: var(--red);
+    padding: 2px 8px;
+    margin-left: 6px;
+    white-space: nowrap;
+    vertical-align: middle;
+  }
+  .between {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    color: var(--gray);
+    text-align: center;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin: 1.4rem 0;
+  }
+  .back-row { text-align: center; margin-top: 2.5rem; }
+  .back-row a {
+    font-family: var(--font-mono);
+    font-weight: 600;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    text-decoration: none;
+    padding: 0.8rem 1.6rem;
+    border: 3px solid var(--black);
+    color: var(--black);
+    display: inline-block;
+  }
+  .back-row a:hover { box-shadow: 5px 5px 0 var(--red); }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <a class="wordmark" href="/">The <span>AI</span> Protest</a>
+  <div class="domain">theprotest.ai</div>
+</div>
+
+<div class="page-head">
+  <p class="kicker">July 11 &middot; San Francisco</p>
+  <h1>The Schedule</h1>
+  <p class="sub">Who spoke, where, and when &middot; 12&ndash;3 PM PT</p>
+</div>
+
+<div class="schedule-wrap">
+
+  <div class="venue">
+    <div class="venue-head"><span class="name">OpenAI</span><span class="when">Rally 12:00 PM &middot; Speeches 12:30 PM &middot; 1455 3rd St</span></div>
+    <div class="speaker">
+      <span class="time">12:30 PM</span>
+      <span class="who"><a href="https://x.com/MichaelTrazzi" target="_blank" rel="noopener">Micha&#235;l Trazzi</a> <span class="role">&mdash; Founder, Stop The AI Race</span><span class="tag">Pause</span></span>
+    </div>
+    <div class="speaker">
+      <span class="time">12:35 PM</span>
+      <span class="who"><a href="https://en.wikipedia.org/wiki/Dean_Preston" target="_blank" rel="noopener">Dean Preston</a> <span class="role">&mdash; Former member, San Francisco Board of Supervisors</span></span>
+    </div>
+    <div class="speaker">
+      <span class="time">12:40 PM</span>
+      <span class="who"><a href="https://www.foodandwaterwatch.org/2021/03/26/mark-schlosberg/" target="_blank" rel="noopener">Mark Schlosberg</a> <span class="role">&mdash; Managing Director of Public Affairs, Food &amp; Water Watch</span><span class="tag">Datacenters</span></span>
+    </div>
+    <div class="speaker">
+      <span class="time">12:45 PM</span>
+      <span class="who"><a href="https://quitgpt.org/" target="_blank" rel="noopener">Friendly Robot</a> <span class="role">&mdash; Representative, QuitGPT</span><span class="tag">QuitGPT</span></span>
+    </div>
+  </div>
+
+  <p class="between">1:00 PM &rarr; Walk to Anthropic</p>
+
+  <div class="venue">
+    <div class="venue-head"><span class="name">Anthropic</span><span class="when">Speeches 1:45 PM &middot; 500 Howard St</span></div>
+    <div class="speaker">
+      <span class="time">1:50 PM</span>
+      <span class="who"><a href="https://intelligence.org/" target="_blank" rel="noopener">Nate Soares</a> <span class="role">&mdash; President, Machine Intelligence Research Institute</span><span class="tag">Pause</span></span>
+    </div>
+    <div class="speaker">
+      <span class="time">1:53 PM</span>
+      <span class="who"><a href="https://evitable.com/" target="_blank" rel="noopener">David Krueger</a> <span class="role">&mdash; Director, Evitable</span><span class="tag">Pause</span></span>
+    </div>
+    <div class="speaker">
+      <span class="time">1:56 PM</span>
+      <span class="who"><a href="https://www.instagram.com/tonchimatta/" target="_blank" rel="noopener">Trinidad Matta</a> <span class="role">&mdash; Law student, 19 years old</span></span>
+    </div>
+  </div>
+
+  <p class="between">2:15 PM &rarr; Walk to Google DeepMind</p>
+
+  <div class="venue">
+    <div class="venue-head"><span class="name">Google DeepMind</span><span class="when">Speeches 2:30 PM &middot; 345 Spear St (Rincon Park)</span></div>
+    <div class="speaker">
+      <span class="time">2:30 PM</span>
+      <span class="who"><a href="https://x.com/MichaelTrazzi" target="_blank" rel="noopener">Micha&#235;l Trazzi</a> <span class="role">&mdash; Stop The AI Race</span><span class="tag">It doesn't need to stop here</span></span>
+    </div>
+    <div class="speaker">
+      <span class="time">2:35 PM</span>
+      <span class="who"><a href="https://www.linkedin.com/in/jeremy-ornstein-a911891b2/" target="_blank" rel="noopener">Jeremy Ornstein</a> <span class="role">&mdash; Member, Irreplaceable</span><span class="tag">Concentration of power</span></span>
+    </div>
+    <div class="speaker">
+      <span class="time">2:40 PM</span>
+      <span class="who"><a href="https://www.linkedin.com/in/jo%C3%A3o-paulo-connolly-6a0662194/" target="_blank" rel="noopener">Jo&#227;o Paulo Connolly</a> <span class="role">&mdash; Organizing Director, Working Partnerships USA / Silicon Valley Rising</span><span class="tag">Union organizing &amp; job automation</span></span>
+    </div>
+    <div class="speaker">
+      <span class="time">2:45 PM</span>
+      <span class="who"><a href="https://www.stat.berkeley.edu/~wfithian/" target="_blank" rel="noopener">Will Fithian</a> <span class="role">&mdash; Statistics Professor, UC Berkeley</span><span class="tag">Pause</span></span>
+    </div>
+  </div>
+
+  <p class="between">3:00 PM &rarr; After-party in Rincon Park</p>
+
+  <div class="back-row"><a href="/">&larr; Back to theprotest.ai</a></div>
+
+</div>
+
+</body>
+</html>
